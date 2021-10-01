@@ -17,6 +17,7 @@ class Login extends React.Component {
           </br>
           <input type = "password" name = "password" /><br></br>
           <input type = "submit" value = "Login" />
+          <button>Reset</button>
 
 
         </form>
