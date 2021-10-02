@@ -6,10 +6,18 @@ class Login extends React.Component {
   constructor(props)
   {
     super(props)
+    const token  = localStorage.getItem("token")
+    let loggedIn = true;
+
+    if(token === null)
+    {
+      loggedIn = false;
+    }
+
     this.state = {
       username : "",
       password : "",
-      loggedIn : ""
+      loggedIn
      
     }
     this.loginHandler = this.loginHandler.bind(this);
@@ -21,11 +29,12 @@ class Login extends React.Component {
     event.preventDefault();
     // console.log(this.state.username);
     // console.log(this.state.password);
-    var username = "bijay";
-    var password = "bijay";
+    var username = "b";
+    var password = "b";
 
     if(username === this.state.username && password === this.state.password)
     {
+      localStorage.setItem("token","mytoken");
       this.setState({
         loggedIn:true
       })
