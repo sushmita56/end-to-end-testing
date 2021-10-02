@@ -3,12 +3,26 @@ import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
 
+  constructor(props)
+  {
+    super(props)
+    this.state = {
+      username : "",
+      password : ""
+    }
+  }
+
+  login(e)
+  {
+    alert("submit function working!!")
+  }
+
 
   render()
   {
     return(
       <div>
-        <form>
+        <form onSubmit={this.login.bind(this)} >
           <label>Username:</label><br>
           </br>
           <input type = "text" name = "usename" /><br></br>
@@ -17,9 +31,7 @@ class Login extends React.Component {
           </br>
           <input type = "password" name = "password" /><br></br>
           <input type = "submit" value = "Login" />
-          <button>Reset</button>
-
-
+        
         </form>
       </div>
     )
