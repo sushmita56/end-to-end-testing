@@ -9,6 +9,20 @@ const ieltsOptions = [
   
 ];
 
+const destinationOptions = [
+  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
+  { value: 'USA', label: 'USA' },
+  { value: 'CANADA', label: 'CANADA' },
+  { value: 'JAPAN', label: 'JAPAN' },
+  
+];
+
+const qualificationOptions = [
+  { value: '+2', label: '+2' },
+  { value: 'Bachelors', label: 'Bachelors' },
+  { value: 'Masters', label: 'Masters' },]
+  ;
+
 
 
 class Register extends React.Component {
@@ -29,12 +43,26 @@ class Register extends React.Component {
     }
     this.state = {
       selectedIeltsOption: "No",
+      selectedDestinationOption: "AUSTRALIA",
+      selectedQualificationOption:"+2",
       showOption: false
     };
-
-
-  
  }
+
+
+ handleDestinationChange = selectedDestinationOption => {
+   
+  this.setState({ selectedDestinationOption });
+  console.log(selectedDestinationOption.value);
+};
+
+handleQualificationChange = selectedQualificationOption => {
+   
+  this.setState({ selectedQualificationOption });
+  console.log(selectedQualificationOption.value);
+};
+
+
 
 
  handleIeltsChange = selectedIeltsOption => {
@@ -51,10 +79,6 @@ class Register extends React.Component {
       showOption:false
     })
   }
-
-  
-   
-
 
   console.log(selectedIeltsOption.value);
 };
@@ -73,8 +97,6 @@ handleDataEntry = (e) => {
 
 
 
-
-
   render()
   {
 
@@ -83,7 +105,7 @@ handleDataEntry = (e) => {
       return <Redirect to="/" />
     }
 
-    const { selectedIeltsOption } = this.state;
+    const { selectedIeltsOption, selectedDestinationOption , selectedQualificationOption } = this.state;
     return(
       <div>
         
@@ -108,39 +130,59 @@ handleDataEntry = (e) => {
                   placeholder = "Enter your emial" /> <br></br>
 
 
-          <select id="destination">
-            <option value="AUSTRALIA">AUSTRALIA</option>
-            <option value="USA">USA</option>
-            <option value="CANADA">CANADA</option>
-            <option value="JAPAN">JAPAN</option>
-          </select> <br></br>
+          
 
-          <select id="qualification">
-            <option value="+2">+2</option>
-            <option value="Bachelor">Bachelor</option>
-            <option value="Masters">Masters</option>
-          </select> <br></br>
+
+          <Select
+            value={selectedQualificationOption}
+            placeholder="+2"
+            onChange={this.handleQualificationChange}
+            options={qualificationOptions}
+            isSearchable={false}
+            
+          />
+
+          <Select
+            value={selectedDestinationOption}
+            isSearchable={false}
+            placeholder="AUSTRALIA"
+            onChange={this.handleDestinationChange}
+            options={destinationOptions}
+            
+          />
+
+
+         
 
           <Select
             value={selectedIeltsOption}
+            placeholder="No"
             onChange={this.handleIeltsChange}
             options={ieltsOptions}
+            isSearchable={false}
+            
           />
 
           {/* invisible div when option yes is clicked!! */}
 
           <div>
           {this.state.showOption &&
-            <label>visibility is working!!!</label>
+           <div>
+             <p>Please enter your ielts score</p>
+             <input type ="text" placeholder = "Listening" ></input>
+             <input type ="text" placeholder = "Reading" ></input>
+             <input type ="text" placeholder = "Writing" ></input>
+             <input type ="text" placeholder = "Speaking" ></input>
+             <input type ="text" placeholder = "Overall" ></input>
+
+           </div>
+            
           }
           </div>
           
 
-          
-
-        <button onClick ={() => this.handleDataEntry()} >Done</button>
+        <button onClick ={() => this.handleDataEntry()} >Save</button>
         <button onClick ={() => this.handleCancel()} >Cancel</button>
-       
       </div>
     )
   }
