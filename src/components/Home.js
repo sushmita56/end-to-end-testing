@@ -42,6 +42,9 @@ render()
         Home Page <br></br>
         <button onClick ={() => this.handleLogout()} >Logout</button>
         <button onClick ={() => this.handleRegister()} >Registration</button>
+        
+
+
       
       </div>
     )
