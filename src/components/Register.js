@@ -42,10 +42,20 @@ class Register extends React.Component {
       
     }
     this.state = {
-      selectedIeltsOption: "No",
-      selectedDestinationOption: "AUSTRALIA",
-      selectedQualificationOption:"+2",
-      showOption: false
+      selectedIeltsOption:  { value: 'No', label: 'No' },
+      selectedDestinationOption:  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
+      selectedQualificationOption:{ value: '+2', label: '+2' },
+      showOption: false,
+      name:"",
+      address:"",
+      phone:"",
+      email:"",
+      percentage:"",
+      listening:"",
+      reading:"",
+      writing:"",
+      speaking:"",
+      overallband:"",
     };
  }
 
@@ -53,13 +63,11 @@ class Register extends React.Component {
  handleDestinationChange = selectedDestinationOption => {
    
   this.setState({ selectedDestinationOption });
-  console.log(selectedDestinationOption.value);
 };
 
 handleQualificationChange = selectedQualificationOption => {
    
   this.setState({ selectedQualificationOption });
-  console.log(selectedQualificationOption.value);
 };
 
 
@@ -79,8 +87,6 @@ handleQualificationChange = selectedQualificationOption => {
       showOption:false
     })
   }
-
-  console.log(selectedIeltsOption.value);
 };
 
 //required function
@@ -92,8 +98,21 @@ handleCancel = (e) => {
 }
 
 handleDataEntry = (e) => {
-  this.props.history.push("/home");
+  // this.props.history.push("/home");
+  const {name,address,selectedDestinationOption,selectedQualificationOption,selectedIeltsOption,phone,email,percentage} = this.state
+  console.log(name);
+  
+  console.log(address);
+  console.log(phone);
+  
+  console.log(email);
+  console.log(percentage);
+  console.log(selectedDestinationOption.value);
+  console.log(selectedIeltsOption.value);
+  console.log(selectedQualificationOption.value);
 }
+
+
 
 
 
@@ -109,25 +128,25 @@ handleDataEntry = (e) => {
     return(
       <div>
         
-        <input type = "text" name = "name" id = "name" autoComplete="off" 
+        <input type = "text"  onChange={(e) => { this.setState({name: e.target.value})}}
           
           placeholder = "Enter your name" /> <br></br>
 
-        <input type = "text" name = "address" id = "address" autoComplete="off" 
+        <input type = "text"  onChange={(e) => { this.setState({address: e.target.value})}}
                  
                   placeholder = "Enter your address" /> <br></br>
 
-         <input type = "text" name = "phone" id = "phone" autoComplete="off" 
+         <input type = "text" onChange={this.handleChange} onChange={(e) => { this.setState({phone: e.target.value})}}
                   
                   placeholder = "Enter your Phone number" /> <br></br>
           
-          <input type = "email" name = "email" id = "email" autoComplete="off" 
+          <input type = "email" onChange={this.handleChange} onChange={(e) => { this.setState({email: e.target.value})}}
                  
                   placeholder = "Enter your emial" /> <br></br>
 
-          <input type = "text" name = "percentage" id = "percentage" autoComplete="off" 
+          <input type = "text" onChange={this.handleChange} onChange={(e) => { this.setState({percentage: e.target.value})}}
                  
-                  placeholder = "Enter your emial" /> <br></br>
+                  placeholder = "Enter your Percentage" /> <br></br>
 
 
           
