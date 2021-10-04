@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react'
 import {Redirect, useHistory } from 'react-router-dom';
 import Select from 'react-select';
+import axios from 'axios';
 
 const ieltsOptions = [
   { value: 'No', label: 'No' },
@@ -42,9 +43,9 @@ class Register extends React.Component {
       
     }
     this.state = {
-      selectedIeltsOption:  { value: 'No', label: 'No' },
-      selectedDestinationOption:  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
-      selectedQualificationOption:{ value: '+2', label: '+2' },
+      ielts:  { value: 'No', label: 'No' },
+      destination:  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
+      qualification:{ value: '+2', label: '+2' },
       showOption: false,
       name:"",
       address:"",
@@ -60,24 +61,24 @@ class Register extends React.Component {
  }
 
 
- handleDestinationChange = selectedDestinationOption => {
+ handleDestinationChange = destination => {
    
-  this.setState({ selectedDestinationOption });
+  this.setState({ destination });
 };
 
-handleQualificationChange = selectedQualificationOption => {
+handleQualificationChange = qualification => {
    
-  this.setState({ selectedQualificationOption });
+  this.setState({ qualification });
 };
 
 
 
 
- handleIeltsChange = selectedIeltsOption => {
+ handleIeltsChange = ielts => {
    
-  this.setState({ selectedIeltsOption });
+  this.setState({ ielts });
 
-  if(selectedIeltsOption.value === "Yes")
+  if(ielts.value === "Yes")
   {
     this.setState({
       showOption:true
@@ -97,19 +98,23 @@ handleCancel = (e) => {
   
 }
 
-handleDataEntry = (e) => {
+handleDataEntry = () => {
   // this.props.history.push("/home");
-  const {name,address,selectedDestinationOption,selectedQualificationOption,selectedIeltsOption,phone,email,percentage} = this.state
-  console.log(name);
-  
-  console.log(address);
-  console.log(phone);
-  
-  console.log(email);
-  console.log(percentage);
-  console.log(selectedDestinationOption.value);
-  console.log(selectedIeltsOption.value);
-  console.log(selectedQualificationOption.value);
+  const {name,address,ielts,destination,
+    qualification,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
+    const data = {name,address,ielts,destination,
+      qualification,phone,email,percentage,listening,reading,writing,speaking,overallband}
+    
+    fetch('/register',{
+      method:'POST',
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(data)
+    }).then(() =>{
+      console.log('new data added!!')
+    })
+   
+   
+    // this.props.history.push("/home");
 }
 
 
@@ -124,7 +129,7 @@ handleDataEntry = (e) => {
       return <Redirect to="/" />
     }
 
-    const { selectedIeltsOption, selectedDestinationOption , selectedQualificationOption } = this.state;
+    const { ielts, destination , qualification } = this.state;
     return(
       <div>
         
@@ -148,12 +153,8 @@ handleDataEntry = (e) => {
                  
                   placeholder = "Enter your Percentage" /> <br></br>
 
-
-          
-
-
           <Select
-            value={selectedQualificationOption}
+            value={qualification}
             placeholder="+2"
             onChange={this.handleQualificationChange}
             options={qualificationOptions}
@@ -162,7 +163,7 @@ handleDataEntry = (e) => {
           />
 
           <Select
-            value={selectedDestinationOption}
+            value={destination}
             isSearchable={false}
             placeholder="AUSTRALIA"
             onChange={this.handleDestinationChange}
@@ -170,11 +171,8 @@ handleDataEntry = (e) => {
             
           />
 
-
-         
-
           <Select
-            value={selectedIeltsOption}
+            value={ielts}
             placeholder="No"
             onChange={this.handleIeltsChange}
             options={ieltsOptions}
@@ -188,11 +186,11 @@ handleDataEntry = (e) => {
           {this.state.showOption &&
            <div>
              <p>Please enter your ielts score</p>
-             <input type ="text" placeholder = "Listening" ></input>
-             <input type ="text" placeholder = "Reading" ></input>
-             <input type ="text" placeholder = "Writing" ></input>
-             <input type ="text" placeholder = "Speaking" ></input>
-             <input type ="text" placeholder = "Overall" ></input>
+             <input type ="text" placeholder = "Listening" onChange={(e) => { this.setState({listening: e.target.value})}} ></input>
+             <input type ="text" placeholder = "Reading" onChange={(e) => { this.setState({reading: e.target.value})}} ></input>
+             <input type ="text" placeholder = "Writing" onChange={(e) => { this.setState({writing: e.target.value})}} ></input>
+             <input type ="text" placeholder = "Speaking" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input>
+             <input type ="text" placeholder = "Overall" onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
 
            </div>
             
