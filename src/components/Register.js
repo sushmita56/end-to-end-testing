@@ -98,28 +98,49 @@ handleCancel = (e) => {
   
 }
 
-handleDataEntry = () => {
+handleDataEntry = async () => {
   // this.props.history.push("/home");
-  const {name,address,ielts,destination,
-    qualification,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
-    const data = {name,address,ielts,destination,
-      qualification,phone,email,percentage,listening,reading,writing,speaking,overallband}
-    
-    fetch('/register',{
-      method:'POST',
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(data)
-    }).then(() =>{
-      console.log('new data added!!')
+  // e.preventDefault();
+
+  // const {name,address,ielts,destination,
+  //   qualification,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
+
+  
+
+    const res = await fetch("/register",{
+      method:"POST",
+      headers:{
+        'Content-Type' : 'application/json'
+      },
+      body:JSON.stringify({
+        name:"bijay",
+        email:"bijay1001@gmail.com",
+        phone:"9829107652",
+        destination:"canada",
+        qualification :"bachelor",
+        address:"bajapatan",
+        percentage:"81",
+        ielts:"yes",
+        listening:"8",
+        reading:"8",
+        writing:"8",
+        speaking:"8",
+        overallband:"8"
+      })
     })
+
+    const data = await res.json();
+    if(data.status === 422 || !data)
+    {
+      window.alert("Failed");
+      console.log("Registration failed");
+    }else{
+      window.alert("Successfull !!!");
+      console.log("Registration successfull");
+    }
+
    
-   
-    // this.props.history.push("/home");
 }
-
-
-
-
 
   render()
   {
@@ -132,7 +153,8 @@ handleDataEntry = () => {
     const { ielts, destination , qualification } = this.state;
     return(
       <div>
-        
+
+       
         <input type = "text"  onChange={(e) => { this.setState({name: e.target.value})}}
           
           placeholder = "Enter your name" /> <br></br>
@@ -196,10 +218,11 @@ handleDataEntry = () => {
             
           }
           </div>
-          
 
-        <button onClick ={() => this.handleDataEntry()} >Save</button>
-        <button onClick ={() => this.handleCancel()} >Cancel</button>
+          <button onClick = {this.handleDataEntry}>Save</button> <button onClick ={() => this.handleCancel()} >Cancel</button>
+     
+
+        
       </div>
     )
   }
