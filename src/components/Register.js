@@ -114,7 +114,7 @@ handleDataEntry = async () => {
       },
       body:JSON.stringify({
         name:"bijay",
-        email:"bijay1001@gmail.com",
+        email:"bijay11@gmail.com",
         phone:"9829107652",
         destination:"canada",
         qualification :"bachelor",
