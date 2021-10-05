@@ -30,22 +30,11 @@ class Register extends React.Component {
   constructor(props)
   {
     super(props)
-    const token  = localStorage.getItem("token")
-    let loggedIn = true;
-
-    if(token === null)
-    {
-      loggedIn = false;
-    }
-
+  
     this.state = {
-      loggedIn,
-      
-    }
-    this.state = {
-      ielts:  { value: 'No', label: 'No' },
-      destination:  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
-      qualification:{ value: '+2', label: '+2' },
+      ielts:  "No",
+      destination:  "AUSTRALIA",
+      qualification:"+2",
       showOption: false,
       name:"",
       address:"",
@@ -102,8 +91,8 @@ handleDataEntry = async () => {
   // this.props.history.push("/home");
   // e.preventDefault();
 
-  // const {name,address,ielts,destination,
-  //   qualification,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
+  const {name,address,ielts,destination,
+    qualification,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
 
   
 
@@ -113,19 +102,19 @@ handleDataEntry = async () => {
         'Content-Type' : 'application/json'
       },
       body:JSON.stringify({
-        name:"bijay",
-        email:"sagar11@gmail.com",
-        phone:"9829107652",
-        destination:"canada",
-        qualification :"bachelor",
-        address:"bajapatan",
-        percentage:"81",
-        ielts:"yes",
-        listening:"8",
-        reading:"8",
-        writing:"8",
-        speaking:"8",
-        overallband:"8"
+        name:name,
+        email:email,
+        phone:phone,
+        destination:destination,
+        qualification :qualification,
+        address:address,
+        percentage:percentage,
+        ielts:ielts,
+        listening:listening,
+        reading:reading,
+        writing:writing,
+        speaking:speaking,
+        overallband:overallband
       })
     })
 
@@ -146,7 +135,8 @@ handleDataEntry = async () => {
   render()
   {
 
-    if(this.state.loggedIn === false)
+    
+    if(localStorage.getItem("token") === null)
     {
       return <Redirect to="/" />
     }
