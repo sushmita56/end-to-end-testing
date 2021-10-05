@@ -114,7 +114,7 @@ handleDataEntry = async () => {
       },
       body:JSON.stringify({
         name:"bijay",
-        email:"bijay11@gmail.com",
+        email:"sagar11@gmail.com",
         phone:"9829107652",
         destination:"canada",
         qualification :"bachelor",
@@ -136,6 +136,7 @@ handleDataEntry = async () => {
       console.log("Registration failed");
     }else{
       window.alert("Successfull !!!");
+      this.props.history.push("/home");
       console.log("Registration successfull");
     }
 
