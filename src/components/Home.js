@@ -1,5 +1,5 @@
 import React from 'react'
-import {Redirect } from 'react-router-dom';
+import {Link, Redirect } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor(props)
@@ -14,8 +14,6 @@ class Home extends React.Component {
   }
 
  async  componentDidMount(){
-
-
 
   const response = await fetch("/home");
   if(response){
@@ -77,9 +75,9 @@ render()
                         <td>{user.email}</td>
                         <td>{user.address}</td>
                         
-                        <td><a href="/users/details/">Details</a></td>
-                        <td><a href="/users/edit/">Edit</a></td>
-                        <td><a href="/users/delete/>">Delete</a></td>
+                        <td><Link to = {`/viewdetails/${user._id}`}>Details</Link></td>
+                        <td><Link to = {`/update/${user._id}`}>Edit</Link></td>
+                        <td><Link to = {`/delete/${user._id}`}>Delete</Link></td>
                         </tr>
                         ))
                     }
