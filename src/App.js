@@ -15,7 +15,7 @@ class App extends React.Component {
                 <Route path="/home" component={Home} />
                 <Route path="/register" component={Register} />
                 <Route path="/logout" component={Login} />
-                <Route path="/viewdetails" component={ViewDetails} />
+                <Route path="/viewdetails/:id" component={ViewDetails} />
             </Router>
             
       
