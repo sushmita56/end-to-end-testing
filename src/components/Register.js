@@ -11,10 +11,10 @@ const ieltsOptions = [
 ];
 
 const destinationOptions = [
-  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
-  { value: 'USA', label: 'USA' },
-  { value: 'CANADA', label: 'CANADA' },
-  { value: 'JAPAN', label: 'JAPAN' },
+  { value: 'australia', label: 'australia' },
+  { value: 'USA', label: 'usa' },
+  { value: 'canada', label: 'canada' },
+  { value: 'japan', label: 'japan' },
   
 ];
 
@@ -32,8 +32,8 @@ class Register extends React.Component {
     super(props)
   
     this.state = {
-      ielts:  { value: 'No', label: 'No' },
-      destination:  { value: 'AUSTRALIA', label: 'AUSTRALIA' },
+      ielts:  { value: 'no', label: 'no' },
+      destination:  { value: 'australia', label: 'australia' },
       qualification:{ value: '+2', label: '+2' },
       showOption: false,
       name:"",
@@ -172,7 +172,7 @@ handleDataEntry = async () => {
                   placeholder = "Enter your Percentage" /> <br></br>
 
           <Select
-            value={this.state.qualification.value}
+            value={this.state.qualification}
             placeholder="+2"
             onChange={this.handleQualificationChange}
             options={qualificationOptions}
@@ -181,17 +181,17 @@ handleDataEntry = async () => {
           />
 
           <Select
-            value={this.state.destination.value}
+            value={this.state.destination}
             isSearchable={false}
-            placeholder="AUSTRALIA"
+            placeholder="australia"
             onChange={this.handleDestinationChange}
             options={destinationOptions}
             
           />
 
           <Select
-            value={this.state.ielts.value}
-            placeholder="No"
+            value={this.state.ielts}
+            placeholder="no"
             onChange={this.handleIeltsChange}
             options={ieltsOptions}
             isSearchable={false}
