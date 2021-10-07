@@ -33,13 +33,9 @@ class UpdateUser extends React.Component {
   
     this.state = {
       editDetails : [],  
-    //   ielts:  { value: 'no', label: 'no' },
-    //   destination:  { value: 'australia', label: 'australia' },
-    //   qualification:{ value: '+2', label: '+2' },
-    des :"",
-    ielts : "",
-    qualification:"",
-     
+      ielts:  { value: 'no', label: 'no' },
+      destination:  { value: 'australia', label: 'australia' },
+      qualification:{ value: '+2', label: '+2' },
       showOption: false,
       name:"",
       address:"",
@@ -51,26 +47,24 @@ class UpdateUser extends React.Component {
       writing:"",
       speaking:"",
       overallband:"",
+      prevIelts:"",
+      prevDestination:"",
+      prevQualification:""
     };
  }
 
 
  handleDestinationChange = destination => {
    
-  this.setState({ destination
-});
-this.setState({
-    des:destination.value
-})
+  this.setState({ destination});
 
-console.log(this.state.des)
 };
 
 
 
 handleQualificationChange = qualification => {
    
-  this.setState({qualification: qualification.value });
+  this.setState({qualification});
 };
 
 
@@ -78,9 +72,9 @@ handleQualificationChange = qualification => {
 
  handleIeltsChange = ielts => {
    
-  this.setState({  ielts:ielts.value });
+  this.setState({  ielts });
 
-  if(ielts === "Yes")
+  if(ielts.value === "yes")
   {
     this.setState({
       showOption:true
@@ -104,17 +98,43 @@ handleDataEntry = async () => {
   // this.props.history.push("/home");
   // e.preventDefault();
 
-  const ielts = this.state.ielts.value
-  const destination =  this.state.destination.value
-  const qualification = this.state.qualification.value
+//   when something change in the react select then it stores json array with value and label so we have to select value only not the json array string
 
-  console.log(this.state.ielts.value)
+var ielts,destination,qualification
+
+    if(this.state.ielts !== this.state.prevIelts)
+    {
+        ielts = this.state.ielts.value
+    }else{
+        ielts = this.state.prevIelts
+    }
+    if(this.state.destination !== this.state.prevDestination){
+        destination = this.state.destination.value
+    }else{
+        destination = this.state.prevDestination
+    }
+
+    if(this.state.qualification !== this.state.prevQualification){
+        qualification = this.state.qualification.value
+    }else{
+        qualification = this.state.prevQualification
+    }
+
+    console.log(ielts + destination + qualification)
+
+  
+
+//   const ielts = this.state.ielts.value
+//   const destination =  this.state.destination.value
+//   const qualification = this.state.qualification.value
+
+//   console.log(this.state.ielts.value)
 
   const {name,address,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
 
   
 
-    const res = await fetch("/register",{
+    const res = await fetch(`/update/${this.props.match.params.id}`,{
       method:"POST",
       headers:{
         'Content-Type' : 'application/json'
@@ -154,7 +174,7 @@ handleDataEntry = async () => {
 async componentDidMount()
 {
 
-    console.log(this.props.match.params.id)
+    // console.log(this.props.match.params.id)
 
     const response = await fetch(`/update/${this.props.match.params.id}`);
       if(response){
@@ -164,7 +184,7 @@ async componentDidMount()
            editDetails : data,  
         });
         }
-        console.log(UpdateUser)
+        // console.log(UpdateUser)
 
     }
     console.log(this.state.editDetails.ielts)
@@ -180,10 +200,14 @@ async componentDidMount()
         email:this.state.editDetails.email,
         phone:this.state.editDetails.phone,
         destination:this.state.editDetails.destination,
+        prevDestination:this.state.editDetails.destination,
         qualification :this.state.editDetails.qualification,
+        prevQualification :this.state.editDetails.qualification,
+
         address:this.state.editDetails.address,
         percentage:this.state.editDetails.percentage,
         ielts:this.state.editDetails.ielts,
+        prevIelts:this.state.editDetails.ielts,
         listening:this.state.editDetails.listening,
         reading:this.state.editDetails.reading,
         writing:this.state.editDetails.writing,
@@ -251,7 +275,7 @@ async componentDidMount()
           />
 
           <Select
-            value={this.state.ielts }
+            value={this.state.ielts}
             placeholder={this.state.editDetails.ielts}
             onChange={this.handleIeltsChange}
             options={ieltsOptions}
