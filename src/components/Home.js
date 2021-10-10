@@ -28,6 +28,12 @@ class Home extends React.Component {
   }
   }
 
+  handleAdminUpdate = () => {
+
+    this.props.history.push("/setting");
+
+  }
+
 
   handleLogout = (e) => {
     localStorage.removeItem("token");
@@ -54,10 +60,7 @@ class Home extends React.Component {
     }
 
 
-    
-
-  }
-
+  } 
   
 render()
   {
@@ -105,6 +108,8 @@ render()
             </div>
             <button onClick ={() => this.handleLogout()} >Logout</button>
             <button onClick ={() => this.handleRegister()} >Registration</button>
+        <button onClick ={() => this.handleAdminUpdate()} >Setting</button>
+
       </div>
     )
   }
