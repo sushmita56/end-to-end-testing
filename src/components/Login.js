@@ -23,22 +23,45 @@ class Login extends React.Component {
     this.loginHandler = this.loginHandler.bind(this);
   }
 
-  loginHandler(event)
+  async loginHandler(event)
   {
   
     event.preventDefault();
-    // console.log(this.state.username);
-    // console.log(this.state.password);
-    var username = "b";
-    var password = "b";
 
-    if(username === this.state.username && password === this.state.password)
-    {
+    const {username,password} = this.state
+
+    const res = await fetch("/",{
+      method:"POST",
+      headers:{
+        'Content-Type' : 'application/json'
+      },
+      body:JSON.stringify({
+        username:username,
+        password:password,
+       
+      })
+    })
+
+    const data = await res.json();
+    console.log(data)
+
+    if(username === data.username && password === data.password){
+
       localStorage.setItem("token","mytoken");
       this.setState({
         loggedIn:true
       })
+
+      this.props.history.push("/home");
+
     }
+
+    
+
+    // if(username === this.state.username && password === this.state.password)
+    // {
+   
+    // }
   }
 
 

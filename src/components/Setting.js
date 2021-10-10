@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {Redirect, useHistory } from 'react-router-dom';
+
 
 class Setting extends Component{
     constructor(){
@@ -6,6 +8,12 @@ class Setting extends Component{
     }
 
     render(){
+
+        if(localStorage.getItem("token") === null)
+            {
+            return <Redirect to="/" />
+            }
+
         return(
             <div>
                 <p>This is a Admin setting page!!</p>
