@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import {Link, Redirect } from 'react-router-dom';
 
 class Home extends React.Component {
@@ -39,6 +39,25 @@ class Home extends React.Component {
     this.props.history.push("/register");
   }
 
+  handleDelete = async (user_id) =>{
+    window.alert(user_id + "data has been deleted from database!!") 
+
+    try {
+
+     await fetch(`delete/${user_id}`);
+
+      
+    } catch (error) {
+
+      console.log(error)
+      
+    }
+
+
+    
+
+  }
+
   
 render()
   {
@@ -77,7 +96,7 @@ render()
                         
                         <td><Link to = {`/viewdetails/${user._id}`}>Details</Link></td>
                         <td><Link to = {`/update/${user._id}`}>Edit</Link></td>
-                        <td><Link to = {`/delete/${user._id}`}>Delete</Link></td>
+                        <td><Link to ={`/`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></td>
                         </tr>
                         ))
                     }

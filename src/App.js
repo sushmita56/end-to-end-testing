@@ -6,6 +6,7 @@ import Register from './components/Register';
 import UpdateUser from './components/UpdateUser';
 import ViewDetails from './components/ViewDetails';
 
+
 class App extends React.Component {
   render()
   {
@@ -17,8 +18,9 @@ class App extends React.Component {
                 <Route path="/register" component={Register} />
                 <Route path="/logout" component={Login} />
                 <Route path="/viewdetails/:id" component={ViewDetails} />
-                <Route path="/update/:id" component={UpdateUser
-                } />
+                <Route path="/update/:id" component={UpdateUser} />
+                
+
             </Router>
             
       

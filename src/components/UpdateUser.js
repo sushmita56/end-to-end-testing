@@ -102,6 +102,8 @@ handleDataEntry = async () => {
 
 var ielts,destination,qualification
 
+    // console.log(this.state.ielts.value);
+
     if(this.state.ielts !== this.state.prevIelts)
     {
         ielts = this.state.ielts.value
