@@ -21,9 +21,36 @@ class Setting extends Component{
         
     }
 
-    changeSetting =() =>{
+    changeSetting = async (e) =>{
         // change setting button handler
-        
+        e.preventDefault()
+
+        const{user_id,newUsername, newPassword} = this.state
+
+        const res = await fetch("/changesetting",{
+            method:"POST",
+            headers:{
+              'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+
+                user_id:user_id,
+                newUsername:newUsername,
+                newPassword:newPassword
+                
+            })
+          })
+
+          const data = await res.json();
+
+          if(!data){
+            window.alert("Registration Failed!!!");
+
+          }else{
+            window.alert(JSON.stringify(data.response));
+            this.props.history.push("/home");
+
+          }
     }
 
     render(){
@@ -35,7 +62,7 @@ class Setting extends Component{
 
         return(
             <div>
-                <form onSubmit={(event) => this.loginHandler} >
+                <form onSubmit={(event) => this.changeSetting()} >
 
                 <input type = "text"
                  name = "user_id"
