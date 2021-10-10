@@ -56,12 +56,6 @@ class Login extends React.Component {
 
     }
 
-    
-
-    // if(username === this.state.username && password === this.state.password)
-    // {
-   
-    // }
   }
 
 
