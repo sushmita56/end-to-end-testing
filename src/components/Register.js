@@ -5,14 +5,14 @@ import Select from 'react-select';
 import axios from 'axios';
 
 const ieltsOptions = [
-  { value: 'No', label: 'No' },
-  { value: 'Yes', label: 'Yes' },
+  { value: 'no', label: 'no' },
+  { value: 'yes', label: 'yes' },
   
 ];
 
 const destinationOptions = [
   { value: 'australia', label: 'australia' },
-  { value: 'USA', label: 'usa' },
+  { value: 'usa', label: 'usa' },
   { value: 'canada', label: 'canada' },
   { value: 'japan', label: 'japan' },
   
@@ -20,8 +20,8 @@ const destinationOptions = [
 
 const qualificationOptions = [
   { value: '+2', label: '+2' },
-  { value: 'Bachelors', label: 'Bachelors' },
-  { value: 'Masters', label: 'Masters' },]
+  { value: 'bachelors', label: 'bachelors' },
+  { value: 'masters', label: 'masters' },]
   ;
 
 
@@ -67,7 +67,7 @@ handleQualificationChange = qualification => {
    
   this.setState({ ielts });
 
-  if(ielts.value === "Yes")
+  if(ielts.value === "y es")
   {
     this.setState({
       showOption:true
@@ -204,11 +204,11 @@ handleDataEntry = async () => {
           {this.state.showOption &&
            <div>
              <p>Please enter your ielts score</p>
-             <input type ="text" placeholder = "Listening" onChange={(e) => { this.setState({listening: e.target.value})}} ></input>
-             <input type ="text" placeholder = "Reading" onChange={(e) => { this.setState({reading: e.target.value})}} ></input>
-             <input type ="text" placeholder = "Writing" onChange={(e) => { this.setState({writing: e.target.value})}} ></input>
-             <input type ="text" placeholder = "Speaking" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input>
-             <input type ="text" placeholder = "Overall" onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
+             <input type ="text" placeholder = "listening" onChange={(e) => { this.setState({listening: e.target.value})}} ></input>
+             <input type ="text" placeholder = "reading" onChange={(e) => { this.setState({reading: e.target.value})}} ></input>
+             <input type ="text" placeholder = "writing" onChange={(e) => { this.setState({writing: e.target.value})}} ></input>
+             <input type ="text" placeholder = "speaking" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input>
+             <input type ="text" placeholder = "overall" onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
 
            </div>
             

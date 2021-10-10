@@ -78,10 +78,17 @@ handleQualificationChange = qualification => {
   {
     this.setState({
       showOption:true
+
     })
   }else{
     this.setState({
-      showOption:false
+      showOption:false,
+      listening :"",
+      reading:"",
+      speaking:"",
+      writing:"",
+      overallband:""
+
     })
   }
 };
@@ -282,7 +289,6 @@ async componentDidMount()
             onChange={this.handleIeltsChange}
             options={ieltsOptions}
             isSearchable={false}
-            
           />
 
           {/* invisible div when option yes is clicked!! */}
