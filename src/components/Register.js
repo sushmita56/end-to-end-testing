@@ -67,7 +67,7 @@ handleQualificationChange = qualification => {
    
   this.setState({ ielts });
 
-  if(ielts.value === "y es")
+  if(ielts.value === "yes")
   {
     this.setState({
       showOption:true

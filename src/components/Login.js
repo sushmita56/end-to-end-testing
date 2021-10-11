@@ -1,5 +1,7 @@
 import React from 'react'
 import {Redirect } from 'react-router-dom';
+import '../cssfolder/Login.css';
+import LoginLogo from '../images/loginlogowaves.png'
 
 class Login extends React.Component {
 
@@ -66,26 +68,40 @@ class Login extends React.Component {
       return <Redirect to = "/home" />
     }
     return(
-      <div>
-        <form onSubmit={(event) => this.loginHandler} >
-          <label>Username:</label><br>
-          </br>
-          <input type = "text"
-                 name = "usename"
-                 value = {this.state.username}
-                 onChange = {(event) => this.setState({username: event.target.value})}
-           /><br></br>
+      <div className = "container main">
+        <div className = "primary">
+          {/* image section div */}
+            <div className = "text-center">
+              <img className = "loginlogo" src ={LoginLogo} />
+            </div>
 
-          <label>Password:</label><br>
-          </br>
-          <input type = "password" 
-                 name = "password"
-                 value = {this.state.password}
-                 onChange = {(event) => this.setState({password: event.target.value})}
-           /><br></br>
-          <input type = "submit" value = "Login"  onClick = {e => this.loginHandler(e)} />
-        
-        </form>
+            {/* form section div */}
+
+            <div className = "formdiv text-center">
+
+                  <form onSubmit={() => this.loginHandler} >
+                  
+                    <input type = "text"
+                          name = "usename"
+                          value = {this.state.username}
+                          onChange = {(event) => this.setState({username: event.target.value})}
+                          className = "username"
+                    /><br></br>
+
+                    <input type = "password" 
+                          name = "password"
+                          value = {this.state.password}
+                          onChange = {(event) => this.setState({password: event.target.value})}
+                          className = "password"
+                    /><br></br>
+                    <input type = "submit" value = "Login"  onClick = {e => this.loginHandler(e)} className = "submitbutton" />
+              
+              </form>
+
+            </div>
+
+        </div>
+
       </div>
     )
   }
