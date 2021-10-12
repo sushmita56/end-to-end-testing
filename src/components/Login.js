@@ -2,6 +2,7 @@ import React from 'react'
 import {Redirect } from 'react-router-dom';
 import '../cssfolder/Login.css';
 import LoginLogo from '../images/loginlogowaves.png'
+import ReactModal from 'react-modal';
 
 class Login extends React.Component {
 
@@ -19,6 +20,9 @@ class Login extends React.Component {
     this.state = {
       username : "",
       password : "",
+      usernameError:"",
+      passwordError:"",
+      showModal: false,
       loggedIn
      
     }
@@ -30,7 +34,17 @@ class Login extends React.Component {
   
     event.preventDefault();
 
+    // condition for validation
+
+    
+
     const {username,password} = this.state
+
+    if(username === "" && password === ""){
+      this.setState({
+        showModal:true
+      })
+    }
 
     const res = await fetch("/",{
       method:"POST",
@@ -58,6 +72,14 @@ class Login extends React.Component {
 
     }
 
+  }
+
+  // closing the modal dialog
+
+  handleCloseModal = () => {
+      this.setState({
+        showModal:false
+      })
   }
 
 
@@ -90,7 +112,9 @@ class Login extends React.Component {
                           onChange = {(event) => this.setState({username: event.target.value})}
                           className = "username"
                           placeholder = "Username"
-                    /><br></br>
+                    />
+                    {this.state.usernameError}
+                    <br></br>
 
                     <input type = "password" 
                           name = "password"
@@ -98,7 +122,9 @@ class Login extends React.Component {
                           onChange = {(event) => this.setState({password: event.target.value})}
                           className = "password"
                           placeholder = "Password"
-                    /><br></br>
+                    />
+                     {this.state.passwordError}
+                    <br></br>
                   
 
 
@@ -106,6 +132,20 @@ class Login extends React.Component {
                     <input type = "submit" value = "LOGIN"  onClick = {e => this.loginHandler(e)} className = "submitbutton" />
               
               </form>
+
+
+              {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div>Hello This is a modal at the center</div>
+            
+             </ReactModal>}
 
               
 
