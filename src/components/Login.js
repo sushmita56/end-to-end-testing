@@ -68,14 +68,17 @@ class Login extends React.Component {
       return <Redirect to = "/home" />
     }
     return(
-      <div className = "container main">
+     
         <div className = "primary">
-          {/* image section div */}
+           
             <div className = "text-center">
               <img className = "loginlogo" src ={LoginLogo} />
+
             </div>
 
             {/* form section div */}
+
+           
 
             <div className = "formdiv text-center">
 
@@ -86,6 +89,7 @@ class Login extends React.Component {
                           value = {this.state.username}
                           onChange = {(event) => this.setState({username: event.target.value})}
                           className = "username"
+                          placeholder = "Username"
                     /><br></br>
 
                     <input type = "password" 
@@ -93,16 +97,23 @@ class Login extends React.Component {
                           value = {this.state.password}
                           onChange = {(event) => this.setState({password: event.target.value})}
                           className = "password"
+                          placeholder = "Password"
                     /><br></br>
-                    <input type = "submit" value = "Login"  onClick = {e => this.loginHandler(e)} className = "submitbutton" />
+                  
+
+
+
+                    <input type = "submit" value = "LOGIN"  onClick = {e => this.loginHandler(e)} className = "submitbutton" />
               
               </form>
 
-            </div>
+              
+
+            </div> 
 
         </div>
 
-      </div>
+      
     )
   }
 }
