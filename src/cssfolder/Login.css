@@ -82,6 +82,8 @@ input[type="password"]:focus {
   background-color: #fff;
   transform: translate(-50%, -50%);
   outline: transparent;
+  height: 18vh;
+  width: 30%;
 }
 .Overlay {
   position: fixed;
@@ -90,4 +92,7 @@ input[type="password"]:focus {
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
+}
+.sademoji {
+  width: 10%;
 }

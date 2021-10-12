@@ -3,6 +3,7 @@ import {Redirect } from 'react-router-dom';
 import '../cssfolder/Login.css';
 import LoginLogo from '../images/loginlogowaves.png'
 import ReactModal from 'react-modal';
+import SadEmoji from '../images/sad.png'
 
 class Login extends React.Component {
 
@@ -20,9 +21,9 @@ class Login extends React.Component {
     this.state = {
       username : "",
       password : "",
-      usernameError:"",
-      passwordError:"",
+
       showModal: false,
+      errorMessage :"",
       loggedIn
      
     }
@@ -39,38 +40,66 @@ class Login extends React.Component {
     
 
     const {username,password} = this.state
+   
 
     if(username === "" && password === ""){
       this.setState({
-        showModal:true
+        showModal:true,
+        errorMessage:"Please Enter Your Login Credential !!"
       })
-    }
-
-    const res = await fetch("/",{
-      method:"POST",
-      headers:{
-        'Content-Type' : 'application/json'
-      },
-      body:JSON.stringify({
-        username:username,
-        password:password,
-       
-      })
-    })
-
-    const data = await res.json();
-    console.log(data)
-
-    if(username === data.username && password === data.password){
-
-      localStorage.setItem("token","mytoken");
+    }else if(username === ""){
       this.setState({
-        loggedIn:true
+        showModal:true,
+        errorMessage:"Username Required !!"
       })
+    }else if(password === ""){
+      this.setState({
+        showModal:true,
+        errorMessage:"Password Required !!"
+      })
+    }else{
 
-      this.props.history.push("/home");
 
+      const res = await fetch("/",{
+        method:"POST",
+        headers:{
+          'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify({
+          username:username,
+          password:password,
+         
+        })
+      })
+  
+      const data = await res.json();
+      console.log(JSON.stringify(data))
+      if(data.status === 201){
+        localStorage.setItem("token","mytoken");
+        this.setState({
+          loggedIn:true
+        })
+  
+        this.props.history.push("/home");
+
+      }
+      else{
+
+        this.setState({
+          showModal:true,
+          errorMessage:JSON.stringify(data.error)
+        })
+
+      }
+
+
+     
     }
+    // else{
+
+    
+
+    // }
 
   }
 
@@ -80,6 +109,12 @@ class Login extends React.Component {
       this.setState({
         showModal:false
       })
+  }
+
+  hideUsernameError = () =>{
+    this.setState({
+      showUserNameError:false
+    })
   }
 
 
@@ -112,8 +147,8 @@ class Login extends React.Component {
                           onChange = {(event) => this.setState({username: event.target.value})}
                           className = "username"
                           placeholder = "Username"
+                          onClick = {this.hideUsernameError}
                     />
-                    {this.state.usernameError}
                     <br></br>
 
                     <input type = "password" 
@@ -123,7 +158,7 @@ class Login extends React.Component {
                           className = "password"
                           placeholder = "Password"
                     />
-                     {this.state.passwordError}
+                     
                     <br></br>
                   
 
@@ -143,7 +178,10 @@ class Login extends React.Component {
               overlayClassName="Overlay"
               onRequestClose={this.handleCloseModal}
            >
-             <div>Hello This is a modal at the center</div>
+             <div className = "modaldiv text-center">
+               <p>{this.state.errorMessage}</p>
+               <img className = "sademoji"  src = {SadEmoji}></img>
+              </div>
             
              </ReactModal>}
 
