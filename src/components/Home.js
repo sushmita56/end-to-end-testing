@@ -7,12 +7,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-// import { makeStyles } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
-import { borderRadius, minWidth } from '@mui/system';
-import { green } from '@mui/material/colors';
+import { TableFooter } from '@mui/material';
+import { TablePagination } from '@mui/material';
 
 class Home extends React.Component {
   constructor(props)
@@ -22,6 +18,8 @@ class Home extends React.Component {
     this.state = {
       allUser : [],
       DataisLoaded: false,
+      page:0,
+      rowsPerPage:5
      
     }
   
@@ -75,9 +73,23 @@ class Home extends React.Component {
       console.log(error)
       
     }
-
-
   } 
+
+  handleChangePage = (event, newPage) => {
+    this.setState({
+      page:newPage
+    })
+  };
+
+  handleChangeRowsPerPage = (event) => {
+    this.setState({
+      rowsPerPage:[event.target.value],
+      page:0
+    })
+    // setRowsPerPage(+event.target.value);
+    // setPage(0);
+  };
+  
   
           render()
           {
@@ -87,30 +99,43 @@ class Home extends React.Component {
               return <Redirect to="/" />
             }
 
-            const { allUser,column} = this.state;
+            const { allUser,page,rowsPerPage} = this.state;
             var i = 1; 
         
             
             return(
-              <div className = "container">
-                   <TableContainer component={Paper} className = "tableContainer">
-                <Table>
-                    <TableHead>
-                    <TableRow style = {{backgroundColor:"red"}}>
-                        <TableCell >S.N.</TableCell>
-                        <TableCell >Name</TableCell>
-                        <TableCell >Email</TableCell>
-                        <TableCell >Address</TableCell>
-                        <TableCell >Phone</TableCell>
-                        <TableCell ></TableCell>
-                        <TableCell ></TableCell>
-                        <TableCell ></TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {allUser.map((user) => (
-                        <TableRow key={user.name} >
-                        <TableCell >{i++}</TableCell >
+              // <div className = "container">
+              
+              // </div>
+              <div className = "main">
+
+                
+
+                <div className = "container center-div">
+                <div className = "settingSearch text-center">
+                  <h1>Setting,search and New Registration</h1>
+                </div>
+
+                <div>
+
+                <TableContainer className = "tableContainer" style={{height:500}}>
+                  <Table >
+                     <TableHead>
+                     <TableRow className = "tableHeading">
+                         <TableCell style = {{padding:"25px", color:"white"}}>S.N.</TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}>NAME</TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}>EMAIL</TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}>ADDRESS</TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}>PHONE</TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}></TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}></TableCell>
+                         <TableCell style = {{padding:"25px", color:"white"}}></TableCell>
+                     </TableRow>
+                     </TableHead>
+                     <TableBody>
+                     {allUser.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((user) => (
+                        <TableRow key={user.id} >
+                        <TableCell style = {{padding:"22px"}} >{i++}</TableCell >
                         <TableCell >{user.name}</TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>{user.address}</TableCell>
@@ -122,7 +147,24 @@ class Home extends React.Component {
                     ))}
                     </TableBody>
                 </Table>
-                </TableContainer>
+
+                <TablePagination
+                 rowsPerPageOptions={[5, 10, 15]}
+                 component="div"
+                 count={allUser.length}
+                 rowsPerPage={rowsPerPage}
+                 page={page}
+                 onPageChange={this.handleChangePage}
+                 onRowsPerPageChange={this.handleChangeRowsPerPage}
+               />
+               
+               </TableContainer>
+                </div>
+                   
+               
+                   
+                </div>
+
               </div>
             )
           }
