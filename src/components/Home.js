@@ -4,68 +4,52 @@ import axios from 'axios';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import * as ReactBootstrap  from 'react-bootstrap'
+import '../cssfolder/home.css'
+import MTable from '../components/MTable'
 
-const column = [
-  {dataField:"name" , text :"Player Name"},
-  {dataField:"points_per_game" , text :"Points Per Game"},
-  {dataField:"team_name" , text :"Player Team"},
-]
+
 
 class Home extends React.Component {
   constructor(props)
   {
     super(props)
     
-    // this.state = {
-    //   allUser : [],
-    //   DataisLoaded: false
-    // }
     this.state = {
-      players :[],
-      loading:false,
+      allUser : [],
+      DataisLoaded: false,
+     
     }
+    
 
   }
 
   
 
-  getPlayerData = async () =>{
+  
 
-    try {
 
-      const data = await axios.get("https://nba-players.herokuapp.com/players-stats");
+ async componentDidMount(){
+
+  // this.getPlayerData();
+
+  const response = await fetch("/home");
+  if(response){
+    const data = await response.json();
+    if(data){
       this.setState({
-        players : data.data
-      })
-
-      console.log(this.state.players)
-    } catch (error) {
-      console.log(error)
-    }
-
-  }  
-
-
- componentDidMount(){
-
-  this.getPlayerData();
-
-  // const response = await fetch("/home");
-  // if(response){
-  //   const data = await response.json();
-  //   if(data){
-  //     this.setState({
-  //       allUser: data,
-  //       DataisLoaded: true,
+        allUser: data,
+        DataisLoaded: true,
         
-  //   });
-  //   }
+    });
+    }
 
 
    }
+  }
 
-
-
+  handleDetails(row) {
+    window.alert(row._id)
+  }
 
 
 
@@ -113,8 +97,10 @@ class Home extends React.Component {
               return <Redirect to="/" />
             }
 
-            const { allUser,players } = this.state;
+            const { allUser,column} = this.state;
             var i = 1; 
+          
+            
             return(
 
               // <div>
@@ -153,20 +139,8 @@ class Home extends React.Component {
               //   <button onClick ={() => this.handleAdminUpdate()} >Setting</button>
 
               // </div>
-              <div>
-                
-
-                <div className = "container">
-
-                 <BootstrapTable
-
-                keyField="name"
-                data = {players}
-                columns = {column}
-                pagination = {paginationFactory()}
-                />
-
-                </div>
+              <div className = "container">
+               <MTable />
               </div>
             )
           }
