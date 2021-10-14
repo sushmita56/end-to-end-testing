@@ -1,13 +1,18 @@
 import React, { useReducer, useState } from 'react'
 import {Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import * as ReactBootstrap  from 'react-bootstrap'
 import '../cssfolder/home.css'
-import MTable from '../components/MTable'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+// import { makeStyles } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
-
+import { borderRadius, minWidth } from '@mui/system';
+import { green } from '@mui/material/colors';
 
 class Home extends React.Component {
   constructor(props)
@@ -19,14 +24,8 @@ class Home extends React.Component {
       DataisLoaded: false,
      
     }
-    
-
+  
   }
-
-  
-
-  
-
 
  async componentDidMount(){
 
@@ -42,18 +41,9 @@ class Home extends React.Component {
         
     });
     }
-
-
    }
   }
 
-  handleDetails(row) {
-    window.alert(row._id)
-  }
-
-
-
-  
 
   handleAdminUpdate = () => {
 
@@ -99,48 +89,40 @@ class Home extends React.Component {
 
             const { allUser,column} = this.state;
             var i = 1; 
-          
+        
             
             return(
-
-              // <div>
-              //   <div class="table-data">
-              //   <h2>Total  No of User!!</h2>
-              //       <table border="1">
-              //           <tr>
-              //               <th>S.N</th>
-              //               <th>Name</th>
-              //               <th>Email</th>
-              //               <th>Address</th>
-              //               <th>Details</th>
-              //               <th>Edit</th>
-              //               <th>Delete</th>
-              //           </tr>
-
-              //               {
-              //                 allUser.map((user) => ( 
-              //                   <tr key = {user.id}>
-              //                   <td>{i++}</td>
-              //                   <td>{user.name}</td>
-              //                   <td>{user.email}</td>
-              //                   <td>{user.address}</td>
-                                
-              //                   <td><Link to = {`/viewdetails/${user._id}`}>Details</Link></td>
-              //                   <td><Link to = {`/update/${user._id}`}>Edit</Link></td>
-              //                   <td><Link to ={`/`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></td>
-              //                   </tr>
-              //                   ))
-              //               }
-                      
-              //       </table>
-              //       </div>
-              //       <button onClick ={() => this.handleLogout()} >Logout</button>
-              //       <button onClick ={() => this.handleRegister()} >Registration</button>
-              //   <button onClick ={() => this.handleAdminUpdate()} >Setting</button>
-
-              // </div>
               <div className = "container">
-               <MTable />
+                   <TableContainer component={Paper} className = "tableContainer">
+                <Table>
+                    <TableHead>
+                    <TableRow style = {{backgroundColor:"red"}}>
+                        <TableCell >S.N.</TableCell>
+                        <TableCell >Name</TableCell>
+                        <TableCell >Email</TableCell>
+                        <TableCell >Address</TableCell>
+                        <TableCell >Phone</TableCell>
+                        <TableCell ></TableCell>
+                        <TableCell ></TableCell>
+                        <TableCell ></TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {allUser.map((user) => (
+                        <TableRow key={user.name} >
+                        <TableCell >{i++}</TableCell >
+                        <TableCell >{user.name}</TableCell>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>{user.address}</TableCell>
+                        <TableCell>{user.phone}</TableCell>
+                        <TableCell><Link to = {`/viewdetails/${user._id}`}>Details</Link></TableCell> 
+                        <TableCell><Link to = {`/update/${user._id}`}>Edit</Link></TableCell>
+                        <TableCell><Link to ={`/`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+                </TableContainer>
               </div>
             )
           }
