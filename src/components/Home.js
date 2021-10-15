@@ -17,6 +17,7 @@ import {
 } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
+import { color } from '@mui/system';
 
 
 class Home extends React.Component {
@@ -144,9 +145,33 @@ class Home extends React.Component {
                   <button className = "registerButton" onClick = {this.handleRegister}> New Registration</button>
                   </div>
                   <div class="col-1">
-                  <Menu menuButton={  ({ open }) =><button className = "menuButton">{open ? <i className = "fa fa-close" />  :<i className = "fa fa-bars" />}  </button>} transition>
-                      <MenuItem onClick ={this.handleAdminUpdate}>Change Credential </MenuItem>
-                      <MenuItem onClick = {this.handleLogout}>Logout</MenuItem>
+                  <Menu menuButton={  ({ open }) =><button className = "menuButton">{open ? <i className = "fa fa-close" />  :<i className = "fa fa-bars" />}  </button>}
+                  transition
+                  menuStyles={{
+                    backgroundColor:"#2c2c2c",
+                    color:"white"
+                }}
+                  
+                  >
+                
+                      <MenuItem 
+                      onClick ={this.handleAdminUpdate}
+                      styles={{
+                        hover: {
+                            color: '#2c2c2c',
+                            backgroundColor: 'white'
+                        }
+                    }}
+                      >Change Credential </MenuItem>
+                      <MenuItem 
+                       styles={{
+                        hover: {
+                            color: '#2c2c2c',
+                            backgroundColor: 'white'
+                        }
+                    }}
+                      onClick = {this.handleLogout}>
+                        Logout</MenuItem>
                   </Menu>
                   </div>
                 </div>
@@ -154,7 +179,7 @@ class Home extends React.Component {
                 </div>
 
                 <div className =  "wholeTable">
-                <TableContainer style={{height:550,width:"92%", marginTop:30}}>
+                <TableContainer style={{height:550,width:"94%", marginTop:30}}>
                   <Table>
                      <TableHead>
                      <TableRow className = "tableHeading">
@@ -185,9 +210,9 @@ class Home extends React.Component {
                         <TableCell>{user.email}</TableCell>
                         <TableCell>{user.address}</TableCell>
                         <TableCell>{user.phone}</TableCell>
-                        <TableCell><Link to = {`/viewdetails/${user._id}`}>Details</Link></TableCell> 
-                        <TableCell><Link to = {`/update/${user._id}`}>Edit</Link></TableCell>
-                        <TableCell><Link to ={`/`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></TableCell>
+                        <TableCell><Link className = "details" to = {`/viewdetails/${user._id}`}>Details</Link></TableCell> 
+                        <TableCell><Link className = "edit" to = {`/update/${user._id}`}>Edit</Link></TableCell>
+                        <TableCell><Link className = "delete" to ={`/`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
