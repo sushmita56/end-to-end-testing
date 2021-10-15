@@ -19,7 +19,7 @@ class Home extends React.Component {
       allUser : [],
       DataisLoaded: false,
       page:0,
-      rowsPerPage:5
+      rowsPerPage:7
      
     }
   
@@ -36,6 +36,7 @@ class Home extends React.Component {
       this.setState({
         allUser: data,
         DataisLoaded: true,
+        search:""
         
     });
     }
@@ -89,6 +90,8 @@ class Home extends React.Component {
     // setRowsPerPage(+event.target.value);
     // setPage(0);
   };
+
+ 
   
   
           render()
@@ -99,7 +102,7 @@ class Home extends React.Component {
               return <Redirect to="/" />
             }
 
-            const { allUser,page,rowsPerPage} = this.state;
+            const { allUser,page,rowsPerPage,search} = this.state;
             var i = 1; 
         
             
@@ -113,13 +116,13 @@ class Home extends React.Component {
 
                 <div className = "container center-div">
                 <div className = "settingSearch text-center">
-                  <h1>Setting,search and New Registration</h1>
+                  <input type = "text" placeholder = "Search..." onChange ={(e) => { this.setState({search: e.target.value})}}></input>
                 </div>
 
                 <div>
 
-                <TableContainer className = "tableContainer" style={{height:500}}>
-                  <Table >
+                <TableContainer className = "tableContainer" style={{height:600, marginTop:30}}>
+                  <Table>
                      <TableHead>
                      <TableRow className = "tableHeading">
                          <TableCell style = {{padding:"25px", color:"white"}}>S.N.</TableCell>
@@ -133,7 +136,16 @@ class Home extends React.Component {
                      </TableRow>
                      </TableHead>
                      <TableBody>
-                     {allUser.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((user) => (
+                     {allUser
+                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                     .filter((val) => {
+                       if(search === ""){
+                         return val;
+                       }else if(val.name.toLowerCase().includes(search.toLowerCase())){
+                         return val;
+                       }
+                     })
+                     .map((user) => (
                         <TableRow key={user.id} >
                         <TableCell style = {{padding:"22px"}} >{i++}</TableCell >
                         <TableCell >{user.name}</TableCell>
@@ -149,7 +161,7 @@ class Home extends React.Component {
                 </Table>
 
                 <TablePagination
-                 rowsPerPageOptions={[5, 10, 15]}
+                 rowsPerPageOptions={[7, 12, 15]}
                  component="div"
                  count={allUser.length}
                  rowsPerPage={rowsPerPage}
