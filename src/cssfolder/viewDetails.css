@@ -32,3 +32,18 @@ p {
   color: rgb(72, 71, 71);
   padding: 7px;
 }
+
+.goBackButton {
+  background-color: #ed1c24;
+  border: none;
+  color: white;
+  height: 45px;
+  width: 280px;
+  text-decoration: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.goBackButton:hover {
+  background-color: #2c2c2c;
+}

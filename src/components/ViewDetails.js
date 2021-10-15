@@ -39,6 +39,10 @@ class ViewDetails extends React.Component {
   }
 }
 
+handleGoBack = () => {
+  this.props.history.push("/home");
+}
+
  
 
 
@@ -163,6 +167,11 @@ class ViewDetails extends React.Component {
 
                             </div>
                           }
+                          
+                          <div className = "text-center">
+                          <button className = "goBackButton" onClick = {this.handleGoBack}>Go Back</button>
+
+                          </div>
 
                   </div>
 
