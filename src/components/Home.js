@@ -9,6 +9,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { TablePagination } from '@mui/material';
 import HomeLogo from '../images/homelogowaves.png'
+import { FiAlignJustify } from "react-icons/fi";
+import {
+  Menu,
+  MenuItem,
+  MenuButton
+} from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+import '@szhsin/react-menu/dist/transitions/slide.css';
+
 
 class Home extends React.Component {
   constructor(props)
@@ -122,39 +131,41 @@ class Home extends React.Component {
 
                 {/* top section */}
 
-                <div className = "container" style=  {{backgroundColor:""}}>
+                <div className = "container" style=  {{backgroundColor:"  "}}>
 
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-6"  >
                     <img className = "homeLogo" src = {HomeLogo}></img>
                   </div>
-                  <div class="col-3 inputSearchDiv">
-                  <input className = "searchInput" type = "text" placeholder = "Search..." onChange ={(e) => { this.setState({search: e.target.value})}} />
+                  <div class="col-3" >
+                  <input className = "searchInput" type = "text" placeholder = "Search By name....." onChange ={(e) => { this.setState({search: e.target.value})}} />
                   </div>
-                  <div class="col-3">
-                  <button className = "registerButton" onClick = {this.handleRegister}>New Registration</button>
-                   
+                  <div class="col-2">
+                  <button className = "registerButton" onClick = {this.handleRegister}> New Registration</button>
+                  </div>
+                  <div class="col-1">
+                  <Menu menuButton={  ({ open }) =><button className = "menuButton">{open ? <i className = "fa fa-close" />  :<i className = "fa fa-bars" />}  </button>} transition>
+                      <MenuItem onClick ={this.handleAdminUpdate}>Change Credential </MenuItem>
+                      <MenuItem onClick = {this.handleLogout}>Logout</MenuItem>
+                  </Menu>
                   </div>
                 </div>
 
                 </div>
 
-
-
-       
-
-                <TableContainer className = "tableContainer" style={{height:550, marginTop:30}}>
+                <div className =  "wholeTable">
+                <TableContainer style={{height:550,width:"92%", marginTop:30}}>
                   <Table>
                      <TableHead>
                      <TableRow className = "tableHeading">
-                         <TableCell style = {{padding:"25px", color:"white"}}>S.N.</TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}>NAME</TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}>EMAIL</TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}>ADDRESS</TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}>PHONE</TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}></TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}></TableCell>
-                         <TableCell style = {{padding:"25px", color:"white"}}></TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}>S.N.</TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}>NAME</TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}>EMAIL</TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}>ADDRESS</TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}>PHONE</TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}></TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}></TableCell>
+                         <TableCell style = {{padding:"16px", color:"white"}}></TableCell>
                      </TableRow>
                      </TableHead>
                      <TableBody>
@@ -181,10 +192,8 @@ class Home extends React.Component {
                     ))}
                     </TableBody>
                 </Table>
-
-            
-               
                </TableContainer>
+               </div>
                 
 
                 {/* pagination section */}
