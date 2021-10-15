@@ -7,8 +7,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { TableFooter } from '@mui/material';
 import { TablePagination } from '@mui/material';
+import HomeLogo from '../images/homelogowaves.png'
 
 class Home extends React.Component {
   constructor(props)
@@ -115,13 +115,35 @@ class Home extends React.Component {
                 
 
                 <div className = "container center-div">
-                <div className = "settingSearch text-center">
+                {/* <div className = "settingSearch text-center">
                   <input type = "text" placeholder = "Search..." onChange ={(e) => { this.setState({search: e.target.value})}}></input>
+                  <button className = "registerButton" onClick = {this.handleRegister}>Registration</button>
+                </div> */}
+
+                {/* top section */}
+
+                <div className = "container" style=  {{backgroundColor:""}}>
+
+                <div class="row">
+                  <div class="col-6">
+                    <img className = "homeLogo" src = {HomeLogo}></img>
+                  </div>
+                  <div class="col-3 inputSearchDiv">
+                  <input className = "searchInput" type = "text" placeholder = "Search..." onChange ={(e) => { this.setState({search: e.target.value})}} />
+                  </div>
+                  <div class="col-3">
+                  <button className = "registerButton" onClick = {this.handleRegister}>New Registration</button>
+                   
+                  </div>
                 </div>
 
-                <div>
+                </div>
 
-                <TableContainer className = "tableContainer" style={{height:600, marginTop:30}}>
+
+
+       
+
+                <TableContainer className = "tableContainer" style={{height:550, marginTop:30}}>
                   <Table>
                      <TableHead>
                      <TableRow className = "tableHeading">
@@ -160,18 +182,30 @@ class Home extends React.Component {
                     </TableBody>
                 </Table>
 
-                <TablePagination
-                 rowsPerPageOptions={[7, 12, 15]}
-                 component="div"
-                 count={allUser.length}
-                 rowsPerPage={rowsPerPage}
-                 page={page}
-                 onPageChange={this.handleChangePage}
-                 onRowsPerPageChange={this.handleChangeRowsPerPage}
-               />
+            
                
                </TableContainer>
+                
+
+                {/* pagination section */}
+
+                <div className = "pagination">
+                  <div>
+                      <TablePagination
+                        rowsPerPageOptions={[7, 12, 15]}
+                        component="div"
+                        count={allUser.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={this.handleChangePage}
+                        onRowsPerPageChange={this.handleChangeRowsPerPage}
+                      />
+                  </div>
+
+               
+
                 </div>
+
                    
                
                    
