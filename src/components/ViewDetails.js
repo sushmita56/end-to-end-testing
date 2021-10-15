@@ -1,5 +1,7 @@
+import { fontWeight } from '@mui/system';
 import React from 'react'
 import {Redirect,useHistory,useLocation } from 'react-router-dom';
+import '../cssfolder/viewDetails.css'
 
 
 
@@ -11,6 +13,7 @@ class ViewDetails extends React.Component {
 
    this.state = {
      individualUserData : [],
+     showIeltsScore:false
    }
   }
 
@@ -25,13 +28,16 @@ class ViewDetails extends React.Component {
         if(data){
           this.setState({
            individualUserData : data
-            
         });
         }
-  }
 
-
+        if(this.state.individualUserData.ielts === "yes"){
+          this.setState({
+            showIeltsScore:true
+         });
+        }
   }
+}
 
  
 
@@ -45,29 +51,130 @@ class ViewDetails extends React.Component {
 
     const {individualUserData} = this.state
     return(
-      <div>
-        <h1>Individual User Data!!</h1>
-        
-          <p>{individualUserData.name}</p>
-          <p>{individualUserData.email}</p>
-          <p>{individualUserData.phone}</p>
-          <p>{individualUserData.address}</p>
-          <p>{individualUserData.destination}</p>
-          <p>{individualUserData.qualification}</p>
-          <p>{individualUserData.percentage}</p>
-          <p>{individualUserData.ielts}</p>
-          <p>{individualUserData.listening}</p>
+     
+          <div className =  "detail-center-div">
 
-          <div>
-              <p>{individualUserData.reading}</p>
-              <p>{individualUserData.writing}</p>
-              <p>{individualUserData.speaking}</p>
-              <p>{individualUserData.overallband}</p>
+              <div className = "container header-div text-center">
+                  <h1 className = "heading">Individual Details</h1>
+              </div>
+              <div className = "details-div">
+
+                  {/* <div class=" info-details "> */}
+
+                    <div className ="row ">
+
+                      <div className  ="col-6 text-center">
+                          <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>NAME:</p> 
+                      </div>
+                      <div className  ="col-6 text-left">
+                         <p style = {{textIndent:"4em"}}> {individualUserData.name}</p>
+                      </div>
+
+                    </div>
+
+                    <div className ="row ">
+
+                        <div className  ="col-6 text-center">
+                            <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>EMAIL:</p> 
+                        </div>
+                        <div className  ="col-6 text-left">
+                          <p style = {{textIndent:"4em"}}> {individualUserData.email}</p>
+                        </div>
+
+                      </div>
+
+                      <div className ="row ">
+
+                        <div className  ="col-6 text-center">
+                            <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>ADDRESS:</p> 
+                        </div>
+                        <div className  ="col-6 text-left">
+                          <p style = {{textIndent:"4em"}}> {individualUserData.address}</p>
+                        </div>
+
+                      </div>
+
+                      <div className ="row ">
+
+                        <div className  ="col-6 text-center">
+                            <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>PHONE:</p> 
+                        </div>
+                        <div className  ="col-6 text-left">
+                          <p style = {{textIndent:"4em"}}> {individualUserData.phone}</p>
+                        </div>
+
+                        </div>
+
+                        <div className ="row ">
+
+                              <div className  ="col-6 text-center">
+                                  <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>DESTINATION:</p> 
+                              </div>
+                              <div className  ="col-6 text-left">
+                                <p style = {{textIndent:"4em"}}> {individualUserData.destination}</p>
+                              </div>
+
+                        </div>
+
+                        <div className ="row ">
+
+                          <div className  ="col-6 text-center">
+                              <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>QUALIFICATION:</p> 
+                          </div>
+                          <div className  ="col-6 text-left">
+                            <p style = {{textIndent:"4em"}}> {individualUserData.qualification}</p>
+                          </div>
+
+                          </div>
+                          <div className ="row ">
+
+                          <div className  ="col-6 text-center">
+                              <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>IELTS</p> 
+                          </div>
+                          <div className  ="col-6 text-left">
+                            <p style = {{textIndent:"4em"}}> {individualUserData.ielts}</p>
+                          </div>
+
+                          </div>
+
+                          {this.state.showIeltsScore &&
+                            <div className = "text-center">
+
+                                   <p style = {{fontWeight:"bold",color:"#0000FF" }}><u>IELTS SCORE:</u></p>
+                                   <div className = "row">
+
+                                      <div className = "col-3">
+                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>LISTENING&nbsp;:&nbsp;</span>{individualUserData.listening}</p>
+                                      </div>
+                                      <div className = "col-3">
+                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>READING&nbsp;:&nbsp;</span>{individualUserData.reading}</p>
+                                      </div>
+                                      <div className = "col-3">
+                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>WRITING&nbsp;:&nbsp;</span>{individualUserData.writing}</p>
+                                      </div>
+                                      <div className = "col-3">
+                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>SPEAKING&nbsp;:&nbsp;</span>{individualUserData.speaking}</p>
+                                      </div>
+
+                                   </div>
+
+                                   <p><span style = {{fontWeight:"bold",color:"#00A36C"}}>OVERALL BAND  &nbsp;:&nbsp;</span>{individualUserData.overallband}</p>
+
+
+                            </div>
+                          }
+
+                  </div>
+
+                 
+                 
+
+              {/* </div> */}
+
+
           </div>
-          
-         
         
-      </div>
+  
     )
   }
 }
