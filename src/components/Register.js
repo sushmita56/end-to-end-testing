@@ -175,7 +175,7 @@ class Register extends React.Component {
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ email: e.target.value });
                 }}
                 placeholder=""
               />
@@ -192,7 +192,7 @@ class Register extends React.Component {
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({address: e.target.value });
                 }}
                 placeholder=""
               />
@@ -208,7 +208,7 @@ class Register extends React.Component {
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ phone: e.target.value });
                 }}
                 placeholder=""
               />
@@ -241,7 +241,7 @@ class Register extends React.Component {
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ percentage: e.target.value });
                 }}
                 placeholder=""
               />

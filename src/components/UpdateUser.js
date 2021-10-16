@@ -417,28 +417,28 @@ async componentDidMount()
                 <lable>
                  Listening <span style={{ color: "red" }}>*</span>
               </lable>
-                <input value = {this.state.listening} className="listening-input" type ="text"   onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
+                <input value = {this.state.listening} className="listening-input" type ="text"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
 
                 </div>
                 <div className = "col-3">
                 <lable>
                  Reading <span style={{ color: "red" }}>*</span>
               </lable>
-                <input value = {this.state.reading} className="reading-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
+                <input value = {this.state.reading} className="reading-input" type ="text"  onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
                   <lable>
                  Writing <span style={{ color: "red" }}>*</span>
               </lable>
-                  <input value = {this.state.writing} className="writing-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
+                  <input value = {this.state.writing} className="writing-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
                   <lable>
                  Speaking <span style={{ color: "red" }}>*</span>
               </lable>
-                  <input value = {this.state.speaking} className="speaking-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input><br></br>
+                  <input value = {this.state.speaking} className="speaking-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
 
                   </div>
       
@@ -465,7 +465,7 @@ async componentDidMount()
           </div>
 
           <div className = "text-center">
-           <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
+           <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Update</button>
           </div>
 
       </div>
