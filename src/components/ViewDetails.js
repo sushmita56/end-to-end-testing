@@ -132,6 +132,16 @@ handleGoBack = () => {
                           </div>
                           <div className ="row ">
 
+                            <div className  ="col-6 text-center">
+                                <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>PERCENTAGE/GPA:</p> 
+                            </div>
+                            <div className  ="col-6 text-left">
+                              <p style = {{textIndent:"4em"}}> {individualUserData.percentage}</p>
+                            </div>
+
+                            </div>
+                          <div className ="row ">
+
                           <div className  ="col-6 text-center">
                               <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>IELTS</p> 
                           </div>
