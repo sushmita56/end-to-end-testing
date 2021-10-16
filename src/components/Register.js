@@ -5,6 +5,13 @@ import Select from "react-select";
 import axios from "axios";
 import "../cssfolder/register.css";
 
+const customStyles = {
+  container: provided => ({
+    ...provided,
+    width: 300
+  })
+};
+
 const ieltsOptions = [
   { value: "no", label: "no" },
   { value: "yes", label: "yes" },
@@ -41,6 +48,7 @@ class Register extends React.Component {
       writing: "",
       speaking: "",
       overallband: "",
+      margin :160
     };
   }
 
@@ -58,10 +66,12 @@ class Register extends React.Component {
     if (ielts.value === "yes") {
       this.setState({
         showOption: true,
+        margin:40
       });
     } else {
       this.setState({
         showOption: false,
+        margin:160
       });
     }
   };
@@ -135,7 +145,7 @@ class Register extends React.Component {
 
     const { ielts, destination, qualification } = this.state;
     return (
-      <div className="container main-register-div">
+      <div className="container main-register-div" style = {{marginTop:this.state.margin}}>
         <div className = "register-heading-div text-center">
           <h2 className = "register-heading">Register New Student</h2>
         </div>
@@ -172,7 +182,7 @@ class Register extends React.Component {
             </div>
           </div>
 
-          <div className="row"  style = {{marginTop:"30px"}}>
+          <div className="row"  style = {{marginTop:"20px"}}>
             <div className="col-6" style = {{paddingLeft:"130px"}}>
               <lable>
                 Address: <span style={{ color: "red" }}>*</span>
@@ -205,25 +215,25 @@ class Register extends React.Component {
             </div>
           </div>
 
-          <div className="row"  style = {{marginTop:"30px"}}>
+          <div className="row"  style = {{marginTop:"20px"}}>
             <div className="col-6" style = {{paddingLeft:"130px"}}>
               <lable>
-                Address: <span style={{ color: "red" }}>*</span>
+                Qualification: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
-              <input
-                className="name-input"
-                type="text"
-                onChange={(e) => {
-                  this.setState({ name: e.target.value });
-                }}
-                placeholder=""
+              <Select
+                value={this.state.qualification}
+                placeholder="+2"
+                onChange={this.handleQualificationChange}
+                options={qualificationOptions}
+                isSearchable={false}
+                styles = {customStyles}
               />
             </div>
 
             <div className="col-6" >
               <lable>
-                :
+                Percentage / GPA:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
               <br></br>
@@ -237,78 +247,107 @@ class Register extends React.Component {
               />
             </div>
           </div>
-        </div>
 
-        {/* <div className="container register-heading-div">
-          <h2 className="register-heading">Register New Student</h2>
-        </div>
-
-        <div className="container student-info-div">
-          <div className="row">
-            <div className="col-6" style = {{paddingLeft:"180px"}}>
+          <div className="row"  style = {{marginTop:"20px"}}>
+            <div className="col-6" style = {{paddingLeft:"130px"}}>
               <lable>
-                Name: <span style={{ color: "red" }}>*</span>
+                Destination: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
-              <input
-                className="name-input"
-                type="text"
-                onChange={(e) => {
-                  this.setState({ name: e.target.value });
-                }}
-                placeholder=""
-              />
+              <Select
+            value={this.state.destination}
+            isSearchable={false}
+            placeholder="australia"
+            onChange={this.handleDestinationChange}
+            options={destinationOptions}
+            styles = {customStyles}
+            
+          />
             </div>
 
-            <div className="col-6" style = {{paddingLeft:"180px"}}>
+            <div className="col-6" >
               <lable>
-                Email: <span style={{ color: "red" }}>*</span>
-              </lable>{" "}
-              <br></br>
-              <input
-                className="name-input"
-                type="text"
-                onChange={(e) => {
-                  this.setState({ name: e.target.value });
-                }}
-                placeholder=""
-              />
-            </div>
-          </div>
-
-          <div className="row"  style = {{marginTop:"30px"}}>
-            <div className="col-6"  style = {{paddingLeft:"180px"}}>
-              <lable>
-                Address: <span style={{ color: "red" }}>*</span>
-              </lable>{" "}
-              <br></br>
-              <input
-                className="name-input"
-                type="text"
-                onChange={(e) => {
-                  this.setState({ name: e.target.value });
-                }}
-                placeholder=""
-              />
-            </div>
-
-            <div className="col-6"  style = {{paddingLeft:"180px"}}>
-              <lable>
-                Phone:
+                IELTS:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
               <br></br>
-              <input
-                className="name-input"
-                type="text"
-                onChange={(e) => {
-                  this.setState({ name: e.target.value });
-                }}
-                placeholder=""
-              />
+              <Select
+                  value={this.state.ielts}
+                  placeholder="no"
+                  onChange={this.handleIeltsChange}
+                  options={ieltsOptions}
+                  isSearchable={false}
+                  styles = {customStyles}
+                /> 
             </div>
           </div>
-        </div> */}
+
+          
+
+        </div>
+
+        <div className = "ielts-score-div">
+          {this.state.showOption &&
+           <div className = "ielts-input-div">
+             <p style = {{fontSize:"18px"}}>Please enter your ielts score</p>
+
+              <div className = "row">
+
+                <div className = "col-3">
+                <lable>
+                 Listening <span style={{ color: "red" }}>*</span>
+              </lable>
+                <input className="listening-input" type ="text"   onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
+
+                </div>
+                <div className = "col-3">
+                <lable>
+                 Reading <span style={{ color: "red" }}>*</span>
+              </lable>
+                <input className="reading-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
+
+                  </div>
+                  <div className = "col-3">
+                  <lable>
+                 Writing <span style={{ color: "red" }}>*</span>
+              </lable>
+                  <input className="writing-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
+
+                  </div>
+                  <div className = "col-3">
+                  <lable>
+                 Speaking <span style={{ color: "red" }}>*</span>
+              </lable>
+                  <input className="speaking-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input><br></br>
+
+                  </div>
+      
+
+              </div>
+
+              <div className =  "row m-4">
+
+                <div className = "col-12">
+                <lable>
+                 Overall Band <span style={{ color: "red" }}>*</span>
+              </lable><br></br>
+                  <input className = "overallband-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
+
+                </div> 
+
+              </div>
+
+
+
+           </div>
+            
+          }
+          </div>
+
+          <div className = "text-center">
+           <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
+          </div>
+
       </div>
     );
 
