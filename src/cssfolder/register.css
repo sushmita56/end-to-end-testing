@@ -1,0 +1,39 @@
+.main-register-div {
+  margin-top: 20px;
+  background-color: red;
+  background-color: antiquewhite;
+}
+
+.register-heading-div {
+  background-color: #ed1c24;
+  width: 65%;
+  margin: auto;
+}
+
+.register-heading {
+  color: white;
+  font-size: 18px;
+  padding: 12px;
+  text-align: center;
+}
+
+.student-info-div {
+  /* background-color: brown; */
+  width: 65%;
+  margin: auto;
+}
+
+.name-input {
+  width: 250px;
+  padding: 1px;
+  margin-top: 5px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgb(151, 151, 151);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.name-input:focus {
+  border: 2px solid rgb(48, 48, 48);
+}
