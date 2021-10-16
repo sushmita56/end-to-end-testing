@@ -332,13 +332,8 @@ class Register extends React.Component {
                  Overall Band <span style={{ color: "red" }}>*</span>
               </lable><br></br>
                   <input className = "overallband-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
-
                 </div> 
-
               </div>
-
-
-
            </div>
             
           }
@@ -351,78 +346,7 @@ class Register extends React.Component {
       </div>
     );
 
-    {
-      /* <input type = "text"  onChange={(e) => { this.setState({name: e.target.value})}}
-          
-          placeholder = "Enter your name" /> <br></br>
-
-        <input type = "text"  onChange={(e) => { this.setState({address: e.target.value})}}
-                 
-                  placeholder = "Enter your address" /> <br></br>
-
-         <input type = "text" onChange={this.handleChange} onChange={(e) => { this.setState({phone: e.target.value})}}
-                  
-                  placeholder = "Enter your Phone number" /> <br></br>
-          
-          <input type = "email" onChange={this.handleChange} onChange={(e) => { this.setState({email: e.target.value})}}
-                 
-                  placeholder = "Enter your emial" /> <br></br>
-
-          <input type = "text" onChange={this.handleChange} onChange={(e) => { this.setState({percentage: e.target.value})}}
-                 
-                  placeholder = "Enter your Percentage" /> <br></br>
-
-          <Select
-            value={this.state.qualification}
-            placeholder="+2"
-            onChange={this.handleQualificationChange}
-            options={qualificationOptions}
-            isSearchable={false}
-            
-          />
-
-          <Select
-            value={this.state.destination}
-            isSearchable={false}
-            placeholder="australia"
-            onChange={this.handleDestinationChange}
-            options={destinationOptions}
-            
-          />
-
-          <Select
-            value={this.state.ielts}
-            placeholder="no"
-            onChange={this.handleIeltsChange}
-            options={ieltsOptions}
-            isSearchable={false}
-            
-          /> */
-    }
-
-    {
-      /* invisible div when option yes is clicked!! */
-    }
-
-    {
-      /* <div>
-          {this.state.showOption &&
-           <div>
-             <p>Please enter your ielts score</p>
-             <input type ="text" placeholder = "listening" onChange={(e) => { this.setState({listening: e.target.value})}} ></input>
-             <input type ="text" placeholder = "reading" onChange={(e) => { this.setState({reading: e.target.value})}} ></input>
-             <input type ="text" placeholder = "writing" onChange={(e) => { this.setState({writing: e.target.value})}} ></input>
-             <input type ="text" placeholder = "speaking" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input>
-             <input type ="text" placeholder = "overall" onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
-
-           </div>
-            
-          }
-          </div>
-
-          <button onClick = {this.handleDataEntry}>Save</button> <button onClick ={() => this.handleCancel()} >Cancel</button>
-      */
-    }
+ 
   }
 }
 

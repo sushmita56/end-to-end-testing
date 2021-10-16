@@ -1,0 +1,97 @@
+.main-register-div {
+  background-color: red;
+  background-color: rgb(255, 255, 255);
+}
+
+.register-heading-div {
+  background-color: #ed1c24;
+  width: 48%;
+  margin: auto;
+}
+
+.register-heading {
+  color: white;
+  font-size: 18px;
+  padding: 12px;
+  text-align: center;
+}
+
+.student-info-div {
+  /* background-color: brown; */
+  width: 65%;
+  margin: auto;
+}
+
+.name-input {
+  width: 300px;
+  padding: 4px;
+  margin-top: 5px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgb(213, 211, 211);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 3px;
+}
+
+.name-input:focus {
+  border: 2px solid rgb(27, 120, 220);
+}
+
+.ielts-score-div {
+  width: 65%;
+  padding-top: 25px;
+  margin: auto;
+  /* background-color: aqua; */
+}
+.ielts-input-div {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  /* background-color: rgb(5, 39, 39); */
+}
+
+.listening-input,
+.reading-input,
+.writing-input,
+.speaking-input {
+  width: 60px;
+  padding: 4px;
+  margin: 5px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgb(213, 211, 211);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 3px;
+}
+
+.overallband-input {
+  width: 80px;
+  padding: 5px;
+  margin: 5px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgb(213, 211, 211);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 3px;
+}
+
+.cancelButton,
+.register-Button {
+  background-color: #ed1c24;
+  border: none;
+  color: white;
+  height: 42px;
+  width: 305px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cancelButton {
+  margin-right: 10px;
+}
+.register-Button {
+  margin-left: 10px;
+}

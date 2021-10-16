@@ -4,6 +4,13 @@ import {Redirect, useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 
+const customStyles = {
+  container: provided => ({
+    ...provided,
+    width: 300
+  })
+};
+
 const ieltsOptions = [
   { value: 'no', label: 'no' },
   { value: 'yes', label: 'yes' },
@@ -49,7 +56,8 @@ class UpdateUser extends React.Component {
       overallband:"",
       prevIelts:"",
       prevDestination:"",
-      prevQualification:""
+      prevQualification:"",
+      margin :160
     };
  }
 
@@ -77,11 +85,13 @@ handleQualificationChange = qualification => {
   if(ielts.value === "yes")
   {
     this.setState({
-      showOption:true
+      showOption:true,
+      margin:40
 
     })
   }else{
     this.setState({
+      margin:160,
       showOption:false,
       listening :"",
       reading:"",
@@ -200,7 +210,9 @@ async componentDidMount()
 
     if(this.state.editDetails.ielts === "yes"){
         this.setState({
-            showOption:true
+            showOption:true,
+            margin:40
+
         })
     }
 
@@ -243,79 +255,219 @@ async componentDidMount()
 
     
     return(
-      <div>
 
-       
-        <input type = "text" value = {this.state.name}  onChange={(e) => { this.setState({name: e.target.value})}}
-          
-           /> <br></br>
 
-        <input type = "text" value = {this.state.address}  onChange={(e) => { this.setState({address: e.target.value})}}
-                 
-                  placeholder = "Enter your address" /> <br></br>
 
-         <input type = "text" value = {this.state.phone} onChange={(e) => { this.setState({phone: e.target.value})}}
-                  
-                  placeholder = "Enter your Phone number" /> <br></br>
-          
-          <input type = "email" value = {this.state.email} onChange={(e) => { this.setState({email: e.target.value})}}
-                 
-                  placeholder = "Enter your emial" /> <br></br>
 
-          <input type = "text" value = {this.state.percentage} onChange={(e) => { this.setState({percentage: e.target.value})}}
-                 
-                  placeholder = "Enter your Percentage" /> <br></br>
+      <div className="container main-register-div" style = {{marginTop:this.state.margin}}>
+        <div className = "register-heading-div text-center">
+          <h2 className = "register-heading">Update Student Details</h2>
+        </div>
+        <div className="student-info-div">
+          <div className="row">
+            <div className="col-6" style = {{paddingLeft:"130px"}}>
+              <lable>
+                Name: <span style={{ color: "red" }}>*</span>
+              </lable>{" "}
+              <br></br>
+              <input
+              value = {this.state.name}
+                className="name-input"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ name: e.target.value });
+                }}
+                placeholder=""
+              />
+            </div>
 
-          <Select
-            value={this.state.qualification}
-            placeholder={this.state.editDetails.qualification}
-            onChange={this.handleQualificationChange}
-            options={qualificationOptions}
-            isSearchable={false}
+            <div className="col-6">
+              <lable>
+                Email: <span style={{ color: "red" }}>*</span>
+              </lable>{" "}
+              <br></br>
+              <input
+              value = {this.state.email}
+                className="name-input"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ name: e.target.value });
+                }}
+                placeholder=""
+              />
+            </div>
+          </div>
+
+          <div className="row"  style = {{marginTop:"20px"}}>
+            <div className="col-6" style = {{paddingLeft:"130px"}}>
+              <lable>
+                Address: <span style={{ color: "red" }}>*</span>
+              </lable>{" "}
+              <br></br>
+              <input
+              value = {this.state.address}
+                className="name-input"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ name: e.target.value });
+                }}
+                placeholder=""
+              />
+            </div>
+
+            <div className="col-6" >
+              <lable>
+                Phone:
+                <span style={{ color: "red", textIndent: "2em" }}>*</span>
+              </lable>
+              <br></br>
+              <input
+              value = {this.state.phone}
+                className="name-input"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ name: e.target.value });
+                }}
+                placeholder=""
+              />
+            </div>
+          </div>
+
+          <div className="row"  style = {{marginTop:"20px"}}>
+            <div className="col-6" style = {{paddingLeft:"130px"}}>
+              <lable>
+                Qualification: <span style={{ color: "red" }}>*</span>
+              </lable>{" "}
+              <br></br>
+              <Select
+                      value={this.state.qualification}
+                      placeholder={this.state.editDetails.qualification}
+                      onChange={this.handleQualificationChange}
+                      options={qualificationOptions}
+                      isSearchable={false}
+                     styles = {customStyles}
+              />
+            </div>
+
+            <div className="col-6" >
+              <lable>
+                Percentage / GPA:
+                <span style={{ color: "red", textIndent: "2em" }}>*</span>
+              </lable>
+              <br></br>
+              <input
+              value = {this.state.percentage}
+                className="name-input"
+                type="text"
+                onChange={(e) => {
+                  this.setState({ name: e.target.value });
+                }}
+                placeholder=""
+              />
+            </div>
+          </div>
+
+          <div className="row"  style = {{marginTop:"20px"}}>
+            <div className="col-6" style = {{paddingLeft:"130px"}}>
+              <lable>
+                Destination: <span style={{ color: "red" }}>*</span>
+              </lable>{" "}
+              <br></br>
+              <Select
+              value={this.state.destination}
+              isSearchable={false}
+              placeholder={this.state.editDetails.destination}
+              onChange={this.handleDestinationChange}
+              options={destinationOptions}
+              
+            styles = {customStyles}
             
           />
+            </div>
 
-          <Select
-            value={this.state.destination}
-            isSearchable={false}
-            placeholder={this.state.editDetails.destination}
-            onChange={this.handleDestinationChange}
-            options={destinationOptions}
-            
-          />
+            <div className="col-6" >
+              <lable>
+                IELTS:
+                <span style={{ color: "red", textIndent: "2em" }}>*</span>
+              </lable>
+              <br></br>
+              <Select
+                  value={this.state.ielts}
+                        placeholder={this.state.editDetails.ielts}
+                        onChange={this.handleIeltsChange}
+                        options={ieltsOptions}
+                        isSearchable={false}
+                        styles = {customStyles}
+                /> 
+            </div>
+          </div>
 
-          <Select
-            value={this.state.ielts}
-            placeholder={this.state.editDetails.ielts}
-            onChange={this.handleIeltsChange}
-            options={ieltsOptions}
-            isSearchable={false}
-          />
+          
 
-          {/* invisible div when option yes is clicked!! */}
+        </div>
 
-          <div>
+        <div className = "ielts-score-div">
           {this.state.showOption &&
-           <div>
-             <p>Please enter your ielts score</p>
-             <input type ="text" value = {this.state.listening} placeholder = "Listening" onChange={(e) => { this.setState({listening: e.target.value})}} ></input>
-             <input type ="text" value = {this.state.reading} placeholder = "Reading" onChange={(e) => { this.setState({reading: e.target.value})}} ></input>
-             <input type ="text" value = {this.state.writing} placeholder = "Writing" onChange={(e) => { this.setState({writing: e.target.value})}} ></input>
-             <input type ="text" value = {this.state.speaking} placeholder = "Speaking" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input>
-             <input type ="text" value = {this.state.overallband} placeholder = "Overall" onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
+           <div className = "ielts-input-div">
+             <p style = {{fontSize:"18px",color:"green"}}><u>Your Ielts Score</u></p>
+
+              <div className = "row">
+
+                <div className = "col-3">
+                <lable>
+                 Listening <span style={{ color: "red" }}>*</span>
+              </lable>
+                <input value = {this.state.listening} className="listening-input" type ="text"   onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
+
+                </div>
+                <div className = "col-3">
+                <lable>
+                 Reading <span style={{ color: "red" }}>*</span>
+              </lable>
+                <input value = {this.state.reading} className="reading-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
+
+                  </div>
+                  <div className = "col-3">
+                  <lable>
+                 Writing <span style={{ color: "red" }}>*</span>
+              </lable>
+                  <input value = {this.state.writing} className="writing-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
+
+                  </div>
+                  <div className = "col-3">
+                  <lable>
+                 Speaking <span style={{ color: "red" }}>*</span>
+              </lable>
+                  <input value = {this.state.speaking} className="speaking-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input><br></br>
+
+                  </div>
+      
+
+              </div>
+
+              <div className =  "row m-4">
+
+                <div className = "col-12">
+                <lable>
+                 Overall Band <span style={{ color: "red" }}>*</span>
+              </lable><br></br>
+                  <input value = {this.state.overallband} className = "overallband-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
+
+                </div> 
+
+              </div>
+
+
 
            </div>
             
           }
           </div>
 
-          <button onClick = {this.handleDataEntry}>Save</button>
-        <button onClick ={() => this.handleCancel()} >Back</button>
+          <div className = "text-center">
+           <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
+          </div>
 
-        
-     
-
-        
       </div>
     )
   }
