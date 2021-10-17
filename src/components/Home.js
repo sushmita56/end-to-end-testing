@@ -41,7 +41,8 @@ class Home extends React.Component {
  async componentDidMount(){
 
   // this.getPlayerData();
-  // console.log(this.props.location.state.detail)
+ console.log(sessionStorage.getItem("currentUsername"))
+
 
 
   const response = await fetch("/home");
@@ -62,7 +63,9 @@ class Home extends React.Component {
   handleAdminUpdate = () => {
 
     this.props.history.push({ 
-      pathname: "/setting"
+      pathname: "/setting",
+      search: '?query=abc',
+      state: { detail: "sagargurung"}
       // state: {passedData: this.props.location.state.username}
      });
 
@@ -71,6 +74,7 @@ class Home extends React.Component {
 
   handleLogout = (e) => {
     localStorage.removeItem("token");
+    sessionStorage.removeItem("currentUsername")
     this.props.history.push("/");
     
   }
@@ -123,6 +127,9 @@ class Home extends React.Component {
 
             const { allUser,page,rowsPerPage,search} = this.state;
             var i = 1; 
+
+            // console.log(this.props.location.state.detail)
+
         
             
             return(

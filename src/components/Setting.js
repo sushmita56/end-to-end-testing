@@ -15,9 +15,9 @@ class Setting extends Component{
         }
     }
 
-    async componentDidMount()
+    componentDidMount()
     {
-       
+        // console.log(this.props.location.state.detail)
     }
 
     handleCancel = () =>{
@@ -67,6 +67,8 @@ class Setting extends Component{
             {
             return <Redirect to="/" />
             }
+
+            
 
         return(
             <div className = "setting-main-div">

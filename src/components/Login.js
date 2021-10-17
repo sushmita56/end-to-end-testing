@@ -38,8 +38,13 @@ class Login extends React.Component {
   
     event.preventDefault();
 
+
+
+
     // condition for validation
     const {username,password} = this.state
+    sessionStorage.currentUsername = username
+
    
 
     if(username === "" && password === ""){
@@ -73,16 +78,15 @@ class Login extends React.Component {
       })
   
       const data = await res.json();
-      console.log(JSON.stringify(data))
+      // console.log(JSON.stringify(data))
       if(data.status === 201){
         localStorage.setItem("token","mytoken");
         this.setState({
           loggedIn:true
         })
   
-        this.props.history.push({pathname:"/home",state : {detail:"my data"}});
-
-
+        this.props.history.push({
+          pathname:"/home"});
       }
       else{
 
@@ -96,11 +100,7 @@ class Login extends React.Component {
 
      
     }
-    // else{
-
-    
-
-    // }
+  
 
   }
 
