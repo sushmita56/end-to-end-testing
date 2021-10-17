@@ -43,7 +43,6 @@ class Login extends React.Component {
 
     // condition for validation
     const {username,password} = this.state
-    sessionStorage.currentUsername = username
 
    
 
@@ -80,6 +79,8 @@ class Login extends React.Component {
       const data = await res.json();
       // console.log(JSON.stringify(data))
       if(data.status === 201){
+    sessionStorage.currentUsername = username
+
         localStorage.setItem("token","mytoken");
         this.setState({
           loggedIn:true

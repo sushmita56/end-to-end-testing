@@ -9,7 +9,7 @@ class Setting extends Component{
 
         this.state = {
             user_id : "",
-            newUsername:"",    
+            newUsername: "",    
             newPassword :"",
             confirmPassword :""
         }
@@ -18,6 +18,9 @@ class Setting extends Component{
     componentDidMount()
     {
         // console.log(this.props.location.state.detail)
+        this.setState({
+            newUsername: sessionStorage.getItem("currentUsername")
+        })
     }
 
     handleCancel = () =>{
@@ -98,21 +101,6 @@ class Setting extends Component{
                                     Username: <span style={{ color: "red" }}></span>
                                 </lable>{" "}
                                 <br></br>
-                                <input type = "password" 
-                                        name = "newpassword"
-                                        value = {this.state.newPassword}
-                                        onChange = {(event) => this.setState({newPassword: event.target.value})}
-                                        placeholder = "new password"
-                                        className = "setting-input"
-
-                                />
-                            </div>
-
-                            <div className = "info-div">
-                                <lable>
-                                    New Password: <span style={{ color: "red" }}>*</span>
-                                </lable>{" "}
-                                <br></br>
                                 <input type = "text"
                                         name = "newusername"
                                         value = {this.state.newUsername}
@@ -121,6 +109,23 @@ class Setting extends Component{
                                         className = "setting-input"
 
                                 />
+                               
+                            </div>
+
+                            <div className = "info-div">
+                                <lable>
+                                    New Password: <span style={{ color: "red" }}>*</span>
+                                </lable>{" "}
+                                <br></br>
+                                <input type = "password" 
+                                        name = "newpassword"
+                                        value = {this.state.newPassword}
+                                        onChange = {(event) => this.setState({newPassword: event.target.value})}
+                                        placeholder = "new password"
+                                        className = "setting-input"
+
+                                />
+                               
                             </div>
 
                             <div className = "info-div">

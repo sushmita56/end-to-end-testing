@@ -63,10 +63,7 @@ class Home extends React.Component {
   handleAdminUpdate = () => {
 
     this.props.history.push({ 
-      pathname: "/setting",
-      search: '?query=abc',
-      state: { detail: "sagargurung"}
-      // state: {passedData: this.props.location.state.username}
+      pathname: "/setting"
      });
 
   }
