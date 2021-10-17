@@ -136,6 +136,7 @@ class Home extends React.Component {
               <div className = "main">
 
                 
+        <p className = "resolutionHomeError">Madarchood Badi Screen Pe Dekh !!!</p>
 
                 <div className = "container center-div">
                 {/* <div className = "settingSearch text-center">

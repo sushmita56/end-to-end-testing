@@ -79,7 +79,7 @@ class Login extends React.Component {
       const data = await res.json();
       // console.log(JSON.stringify(data))
       if(data.status === 201){
-    sessionStorage.currentUsername = username
+       sessionStorage.currentUsername = username
 
         localStorage.setItem("token","mytoken");
         this.setState({
@@ -127,7 +127,8 @@ class Login extends React.Component {
       return <Redirect to = "/home" />
     }
     return(
-     
+        <div>
+        <p className = "resolutionLoginError">Madarchood Badi Screen Pe Dekh  :( </p>
         <div className = "primary">
            
             <div className = "text-center">
@@ -190,6 +191,8 @@ class Login extends React.Component {
               
 
             </div> 
+
+        </div>
 
         </div>
 

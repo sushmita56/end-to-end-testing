@@ -96,3 +96,21 @@
 .sademoji {
   width: 10%;
 }
+
+.resolutionLoginError {
+  display: none;
+  text-align: center;
+  margin: 40vh;
+  color: #494949;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .primary {
+    display: none;
+  }
+
+  .resolutionLoginError {
+    display: block;
+  }
+}
