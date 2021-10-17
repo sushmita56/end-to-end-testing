@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import {Link, Redirect } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import '../cssfolder/home.css'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,12 +18,15 @@ import {
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { color } from '@mui/system';
+import { time } from 'faker';
 
 
 class Home extends React.Component {
   constructor(props)
   {
     super(props)
+  // console.log(this.props.location.state.detail)
+
     
     this.state = {
       allUser : [],
@@ -38,6 +41,8 @@ class Home extends React.Component {
  async componentDidMount(){
 
   // this.getPlayerData();
+  // console.log(this.props.location.state.detail)
+
 
   const response = await fetch("/home");
   if(response){
@@ -46,7 +51,7 @@ class Home extends React.Component {
       this.setState({
         allUser: data,
         DataisLoaded: true,
-        search:""
+        search:"",
         
     });
     }
@@ -56,7 +61,10 @@ class Home extends React.Component {
 
   handleAdminUpdate = () => {
 
-    this.props.history.push("/setting");
+    this.props.history.push({ 
+      pathname: "/setting"
+      // state: {passedData: this.props.location.state.username}
+     });
 
   }
 
@@ -106,6 +114,7 @@ class Home extends React.Component {
   
           render()
           {
+
           
             if(localStorage.getItem("token") === null)
             {

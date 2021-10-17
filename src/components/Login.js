@@ -1,9 +1,10 @@
 import React from 'react'
-import {Redirect } from 'react-router-dom';
+import {Redirect,useHistory } from 'react-router-dom';
 import '../cssfolder/Login.css';
 import LoginLogo from '../images/loginlogowaves.png'
 import ReactModal from 'react-modal';
 import SadEmoji from '../images/sad.png'
+
 
 class Login extends React.Component {
 
@@ -21,6 +22,8 @@ class Login extends React.Component {
     this.state = {
       username : "",
       password : "",
+      
+
 
       showModal: false,
       errorMessage :"",
@@ -36,9 +39,6 @@ class Login extends React.Component {
     event.preventDefault();
 
     // condition for validation
-
-    
-
     const {username,password} = this.state
    
 
@@ -80,7 +80,8 @@ class Login extends React.Component {
           loggedIn:true
         })
   
-        this.props.history.push("/home");
+        this.props.history.push({pathname:"/home",state : {detail:"my data"}});
+
 
       }
       else{

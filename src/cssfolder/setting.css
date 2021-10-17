@@ -1,0 +1,67 @@
+.setting-main-div {
+  /* background-color: rgb(189, 184, 184); */
+  margin-top: 20vh;
+}
+
+.setting-heading-div {
+  background-color: #ed1c24;
+  width: 20%;
+  margin: auto;
+}
+
+.setting-heading {
+  color: white;
+  font-size: 18px;
+  padding: 12px;
+  text-align: center;
+}
+
+.setting-info-div {
+  width: 20%;
+  margin: auto;
+  /* background-color: aqua; */
+}
+.info-div {
+  width: 100%;
+  margin: auto;
+  padding-top: 10px;
+  /* background-color: aqua; */
+}
+
+.setting-input {
+  width: 300px;
+  padding: 8px;
+  margin-top: 5px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgb(213, 211, 211);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 3px;
+}
+
+.setting-input:focus {
+  border: 2px solid rgb(27, 120, 220);
+}
+
+.backSetting {
+  background-color: #ed1c24;
+  border: none;
+  color: white;
+  height: 42px;
+  width: 145px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.changeSetting {
+  background-color: #ed1c24;
+  border: none;
+  color: white;
+  height: 42px;
+  width: 145px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
