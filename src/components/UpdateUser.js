@@ -3,6 +3,8 @@ import React from 'react'
 import {Redirect, useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
+import ReactModal from 'react-modal';
+import SadEmoji from '../images/sad.png'
 
 const customStyles = {
   container: provided => ({
@@ -57,7 +59,10 @@ class UpdateUser extends React.Component {
       prevIelts:"",
       prevDestination:"",
       prevQualification:"",
-      margin :160
+      margin :160,
+      registrationErrorMessage :"",
+      showModal: false,
+      showModalSuccessfull:false
     };
  }
 
@@ -97,7 +102,8 @@ handleQualificationChange = qualification => {
       reading:"",
       speaking:"",
       writing:"",
-      overallband:""
+      overallband:"",
+      
 
     })
   }
@@ -109,6 +115,16 @@ handleCancel = (e) => {
   
   this.props.history.push("/home");
   
+}
+
+handleCloseModal = () => {
+  this.setState({
+    showModal:false
+  })
+}
+
+handleOkButton = () => {
+  this.props.history.push("/home");
 }
 
 handleDataEntry = async () => {
@@ -140,20 +156,37 @@ var ielts,destination,qualification
     }
 
     console.log(ielts + destination + qualification)
-
-  
-
-//   const ielts = this.state.ielts.value
-//   const destination =  this.state.destination.value
-//   const qualification = this.state.qualification.value
-
-//   console.log(this.state.ielts.value)
-
   const {name,address,phone,email,percentage,listening,reading,writing,speaking,overallband} = this.state
 
-  
 
-    const res = await fetch(`/update/${this.props.match.params.id}`,{
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+
+    if(ielts === "no"){
+      
+      if(name === "" || address === "" || email ==="" || percentage === ""){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Fileds cannot be left empty !!"
+        })
+      }else if(!email.match(mailformat)){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Email Format!!"
+        })
+      }else if(phone.length > 10){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Mobile Number!!"
+        })
+      }else if(percentage > 100){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Percentage!!"
+        })
+      }else{
+
+      const res = await fetch(`/update/${this.props.match.params.id}`,{
       method:"POST",
       headers:{
         'Content-Type' : 'application/json'
@@ -176,15 +209,134 @@ var ielts,destination,qualification
     })
 
     const data = await res.json();
-    if(data.status === 422 || !data)
-    {
-      window.alert("Failed");
-      console.log("Update Successfull!!! ");
-    }else{
-      window.alert("Successfull !!!");
-      this.props.history.push("/home");
-      console.log("Update Successfull!!");
+        if(data.status == 201){
+          this.setState({
+            showModal:true,
+            registrationErrorMessage:"Something Went Wrong During Update!!"
+          })
+        }else {
+          this.setState({
+            showModalSuccessfull:true,
+            registrationErrorMessage:JSON.stringify(data.message)
+          })
+        }
+
+      
+      }
+    
+    }else if(ielts === "yes"){
+      // if(name === "" || address === "" || email ==="" || percentage === "" || listening ==="" || reading ==="" || speaking ==="" || writing ==="" || overallband ===""){
+      if(name === "" || address === "" || email ==="" || percentage === "" || listening ==="" || reading ==="" || speaking ==="" || writing ==="" || overallband ==="") {
+      this.setState({
+          showModal:true,
+          registrationErrorMessage:"Fileds cannot be left emptyee !!"
+        })
+      }else if(!email.match(mailformat)){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Email Format!!"
+        })
+      }else if(phone.length > 10){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Mobile Number!!"
+        })
+      }else if(speaking > 9 || reading > 9 || writing > 9 || listening > 9 || overallband > 9){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid band Number!!"
+        })
+      }else if(percentage > 100){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Percentage!!"
+        })
+      }else {
+        const res = await fetch(`/update/${this.props.match.params.id}`,{
+          method:"POST",
+          headers:{
+            'Content-Type' : 'application/json'
+          },
+          body:JSON.stringify({
+            name:name,
+            email:email,
+            phone:phone,
+            destination:destination,
+            qualification :qualification,
+            address:address,
+            percentage:percentage,
+            ielts:ielts,
+            listening:listening,
+            reading:reading,
+            writing:writing,
+            speaking:speaking,
+            overallband:overallband
+          })
+        })
+    
+        const data = await res.json();
+            if(data.status == 201){
+              this.setState({
+                showModal:true,
+                registrationErrorMessage:"Something Went Wrong During Update!!"
+              })
+            }else {
+              this.setState({
+                showModalSuccessfull:true,
+                registrationErrorMessage:JSON.stringify(data.message)
+              })
+            }
+    
+
+       
+      }
     }
+
+  
+
+//   const ielts = this.state.ielts.value
+//   const destination =  this.state.destination.value
+//   const qualification = this.state.qualification.value
+
+//   console.log(this.state.ielts.value)
+
+
+  // update validation same as registration validation
+
+  
+
+    // const res = await fetch(`/update/${this.props.match.params.id}`,{
+    //   method:"POST",
+    //   headers:{
+    //     'Content-Type' : 'application/json'
+    //   },
+    //   body:JSON.stringify({
+    //     name:name,
+    //     email:email,
+    //     phone:phone,
+    //     destination:destination,
+    //     qualification :qualification,
+    //     address:address,
+    //     percentage:percentage,
+    //     ielts:ielts,
+    //     listening:listening,
+    //     reading:reading,
+    //     writing:writing,
+    //     speaking:speaking,
+    //     overallband:overallband
+    //   })
+    // })
+
+    // const data = await res.json();
+    // if(data.status === 422 || !data)
+    // {
+    //   window.alert("Failed");
+    //   console.log("Update Successfull!!! ");
+    // }else{
+    //   window.alert("Successfull !!!");
+    //   this.props.history.push("/home");
+    //   console.log("Update Successfull!!");
+    // }
 
    
 }
@@ -224,7 +376,6 @@ async componentDidMount()
         prevDestination:this.state.editDetails.destination,
         qualification :this.state.editDetails.qualification,
         prevQualification :this.state.editDetails.qualification,
-
         address:this.state.editDetails.address,
         percentage:this.state.editDetails.percentage,
         ielts:this.state.editDetails.ielts,
@@ -468,7 +619,42 @@ async componentDidMount()
            <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Update</button>
           </div>
 
+           {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.registrationErrorMessage}</p>
+               <img className = "sademoji"  src = {SadEmoji}></img>
+              </div>
+            
+             </ReactModal>}
+
+              {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModalSuccessfull}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.registrationErrorMessage}</p>
+               <button className = "okButton" onClick = {this.handleOkButton}>OK</button> 
+               
+              </div>
+            
+             </ReactModal>}
+
       </div>
+
+      
     )
   }
 
