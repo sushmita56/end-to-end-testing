@@ -53,6 +53,7 @@ class Register extends React.Component {
       margin :160,
       registrationErrorMessage :"",
       showModal: false,
+      showModalSuccessfull:false
     };
   }
 
@@ -91,7 +92,12 @@ class Register extends React.Component {
     this.setState({
       showModal:false
     })
-}
+  }
+
+  handleOkButton = () => {
+    this.props.history.push("/home");
+  }
+
   handleDataEntry = async () => {
     const ielts = this.state.ielts.value;
     const destination = this.state.destination.value;
@@ -168,12 +174,9 @@ class Register extends React.Component {
           })
         }else {
           this.setState({
-            showModal:true,
+            showModalSuccessfull:true,
             registrationErrorMessage:JSON.stringify(data.message)
           })
-
-            //  this.props.history.push("/home");
-
         }
 
       
@@ -206,6 +209,41 @@ class Register extends React.Component {
           showModal:true,
           registrationErrorMessage:"Invalid Percentage!!"
         })
+      }else {
+        const res = await fetch("/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            phone: phone,
+            destination: destination,
+            qualification: qualification,
+            address: address,
+            percentage: percentage,
+            ielts: ielts,
+            listening: listening,
+            reading: reading,
+            writing: writing,
+            speaking: speaking,
+            overallband: overallband,
+          }),
+        });
+
+        const data = await res.json();
+        if(data.status == 201){
+          this.setState({
+            showModal:true,
+            registrationErrorMessage:"User Already Exist Cannot Register!!"
+          })
+        }else {
+          this.setState({
+            showModalSuccessfull:true,
+            registrationErrorMessage:JSON.stringify(data.message)
+          })
+        }
       }
     }
 
@@ -445,6 +483,25 @@ class Register extends React.Component {
               </div>
             
              </ReactModal>}
+
+              {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModalSuccessfull}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.registrationErrorMessage}</p>
+               <button className = "okButton" onClick = {this.handleOkButton}>OK</button> 
+               
+              </div>
+            
+             </ReactModal>}
+
+             
 
       </div>
     );

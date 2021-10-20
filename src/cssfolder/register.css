@@ -105,3 +105,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
+.okButton {
+  background-color: #ed1c24;
+  border: none;
+  color: white;
+  height: 32px;
+  width: 105px;
+  text-decoration: none;
+  cursor: pointer;
+}
