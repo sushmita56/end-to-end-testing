@@ -4,6 +4,8 @@ import { Redirect, useHistory } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 import "../cssfolder/register.css";
+import ReactModal from 'react-modal';
+import SadEmoji from '../images/sad.png'
 
 const customStyles = {
   container: provided => ({
@@ -48,7 +50,9 @@ class Register extends React.Component {
       writing: "",
       speaking: "",
       overallband: "",
-      margin :160
+      margin :160,
+      registrationErrorMessage :"",
+      showModal: false,
     };
   }
 
@@ -82,12 +86,13 @@ class Register extends React.Component {
     this.props.history.push("/home");
   };
 
+
+  handleCloseModal = () => {
+    this.setState({
+      showModal:false
+    })
+}
   handleDataEntry = async () => {
-    // this.props.history.push("/home");
-    // e.preventDefault();
-
-    console.log(this.state.ielts.value);
-
     const ielts = this.state.ielts.value;
     const destination = this.state.destination.value;
     const qualification = this.state.qualification.value;
@@ -104,38 +109,119 @@ class Register extends React.Component {
       speaking,
       overallband,
     } = this.state;
+    // email regular expression
 
-    const res = await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        destination: destination,
-        qualification: qualification,
-        address: address,
-        percentage: percentage,
-        ielts: ielts,
-        listening: listening,
-        reading: reading,
-        writing: writing,
-        speaking: speaking,
-        overallband: overallband,
-      }),
-    });
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    const data = await res.json();
-    if (data.status === 422 || !data) {
-      window.alert("Failed");
-      console.log("Registration failed");
-    } else {
-      window.alert("Successfull !!!");
-      this.props.history.push("/home");
-      console.log("Registration successfull");
+
+    if(ielts === "no"){
+      
+      if(name === "" || address === "" || email ==="" || percentage === ""){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Fileds cannot be left empty !!"
+        })
+      }else if(!email.match(mailformat)){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Email Format!!"
+        })
+      }else if(phone.length > 10){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Mobile Number!!"
+        })
+      }else if(percentage > 100){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Percentage!!"
+        })
+      }else{
+
+        const res = await fetch("/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            phone: phone,
+            destination: destination,
+            qualification: qualification,
+            address: address,
+            percentage: percentage,
+            ielts: ielts,
+            listening: listening,
+            reading: reading,
+            writing: writing,
+            speaking: speaking,
+            overallband: overallband,
+          }),
+        });
+
+        const data = await res.json();
+        if(data.status == 201){
+          this.setState({
+            showModal:true,
+            registrationErrorMessage:"User Already Exist Cannot Register!!"
+          })
+        }else {
+          this.setState({
+            showModal:true,
+            registrationErrorMessage:JSON.stringify(data.message)
+          })
+
+            //  this.props.history.push("/home");
+
+        }
+
+      
+      }
+    
+    }else if(ielts === "yes"){
+      // if(name === "" || address === "" || email ==="" || percentage === "" || listening ==="" || reading ==="" || speaking ==="" || writing ==="" || overallband ===""){
+      if(name === "" || address === "" || email ==="" || percentage === "" || listening ==="" || reading ==="" || speaking ==="" || writing ==="" || overallband ==="") {
+      this.setState({
+          showModal:true,
+          registrationErrorMessage:"Fileds cannot be left emptyee !!"
+        })
+      }else if(!email.match(mailformat)){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Email Format!!"
+        })
+      }else if(phone.length > 10){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Mobile Number!!"
+        })
+      }else if(speaking > 9 || reading > 9 || writing > 9 || listening > 9 || overallband > 9){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid band Number!!"
+        })
+      }else if(percentage > 100){
+        this.setState({
+          showModal:true,
+          registrationErrorMessage:"Invalid Percentage!!"
+        })
+      }
     }
+
+
+
+
+
+    // const data = await res.json();
+    // if (data.status === 422 || !data) {
+    //   window.alert("Failed");
+    //   console.log("Registration failed");
+    // } else {
+    //   window.alert("Successfull !!!");
+    //   this.props.history.push("/home");
+    //   console.log("Registration successfull");
+    // }
   };
 
   render() {
@@ -206,7 +292,8 @@ class Register extends React.Component {
               <br></br>
               <input
                 className="name-input"
-                type="text"
+
+                type="number"
                 onChange={(e) => {
                   this.setState({ phone: e.target.value });
                 }}
@@ -239,7 +326,7 @@ class Register extends React.Component {
               <br></br>
               <input
                 className="name-input"
-                type="text"
+                type="number"
                 onChange={(e) => {
                   this.setState({ percentage: e.target.value });
                 }}
@@ -297,28 +384,28 @@ class Register extends React.Component {
                 <lable>
                  Listening <span style={{ color: "red" }}>*</span>
               </lable>
-                <input className="listening-input" type ="text"   onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
+                <input className="listening-input"  type="number"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
 
                 </div>
                 <div className = "col-3">
                 <lable>
                  Reading <span style={{ color: "red" }}>*</span>
               </lable>
-                <input className="reading-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
+                <input className="reading-input"  type="number"  onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
                   <lable>
                  Writing <span style={{ color: "red" }}>*</span>
               </lable>
-                  <input className="writing-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
+                  <input className="writing-input"  type="number"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
                   <lable>
                  Speaking <span style={{ color: "red" }}>*</span>
               </lable>
-                  <input className="speaking-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input><br></br>
+                  <input className="speaking-input"  type="number" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
 
                   </div>
       
@@ -331,7 +418,7 @@ class Register extends React.Component {
                 <lable>
                  Overall Band <span style={{ color: "red" }}>*</span>
               </lable><br></br>
-                  <input className = "overallband-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
+                  <input className = "overallband-input"  type="number"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
                 </div> 
               </div>
            </div>
@@ -342,6 +429,22 @@ class Register extends React.Component {
           <div className = "text-center">
            <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
           </div>
+
+           {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.registrationErrorMessage}</p>
+               <img className = "sademoji"  src = {SadEmoji}></img>
+              </div>
+            
+             </ReactModal>}
 
       </div>
     );
