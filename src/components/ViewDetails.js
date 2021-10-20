@@ -13,7 +13,8 @@ class ViewDetails extends React.Component {
 
    this.state = {
      individualUserData : [],
-     showIeltsScore:false
+     showIeltsScore:false,
+     topMargin:"55%",
    }
   }
 
@@ -33,7 +34,8 @@ class ViewDetails extends React.Component {
 
         if(this.state.individualUserData.ielts === "yes"){
           this.setState({
-            showIeltsScore:true
+            showIeltsScore:true,
+            topMargin:"45%"
          });
         }
   }
@@ -53,10 +55,10 @@ handleGoBack = () => {
       return <Redirect to = "/" />
     }
 
-    const {individualUserData} = this.state
+    const {individualUserData, topMargin} = this.state
     return(
      
-          <div className =  "detail-center-div">
+          <div className =  "detail-center-div" style = {{top:topMargin}}> 
 
               <div className = "container header-div text-center">
                   <h1 className = "heading">Individual Details</h1>

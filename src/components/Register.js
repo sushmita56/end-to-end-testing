@@ -66,7 +66,7 @@ class Register extends React.Component {
     if (ielts.value === "yes") {
       this.setState({
         showOption: true,
-        margin:40
+        margin:60
       });
     } else {
       this.setState({
