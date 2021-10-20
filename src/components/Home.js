@@ -20,6 +20,12 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 import { color } from '@mui/system';
 import { time } from 'faker';
 
+const Loading =()=>
+  <div className="loading">
+    <div></div>
+    <div></div>
+  </div>  
+
 
 class Home extends React.Component {
   constructor(props)
@@ -32,7 +38,8 @@ class Home extends React.Component {
       allUser : [],
       DataisLoaded: false,
       page:0,
-      rowsPerPage:7
+      rowsPerPage:7,
+      homeLoading: true,
      
     }
   
@@ -41,8 +48,10 @@ class Home extends React.Component {
  async componentDidMount(){
 
   // this.getPlayerData();
- console.log(sessionStorage.getItem("currentUsername"))
 
+  
+ console.log(sessionStorage.getItem("currentUsername"))
+ this.isLoading = setTimeout(()=>{this.setState({homeLoading: false})}, 2300);
 
 
   const response = await fetch("/home");
@@ -58,6 +67,15 @@ class Home extends React.Component {
     }
    }
   }
+
+  componentWillUnmount()
+  {
+    clearTimeout(this.isLoading);
+  }
+
+  timer = () => setTimeout(()=>{
+    this.setState({homeLoading: false})
+  }, 500);
 
 
   handleAdminUpdate = () => {
@@ -122,7 +140,7 @@ class Home extends React.Component {
               return <Redirect to="/" />
             }
 
-            const { allUser,page,rowsPerPage,search} = this.state;
+            const { allUser,page,rowsPerPage,search,homeLoading} = this.state;
             var i = 1; 
 
             // console.log(this.props.location.state.detail)
@@ -133,10 +151,11 @@ class Home extends React.Component {
               // <div className = "container">
               
               // </div>
-              <div className = "main">
+              homeLoading ? (<Loading/>)
+              :(<div className = "main">
 
                 
-        <p className = "resolutionHomeError">Madarchood Badi Screen Pe Dekh !!!</p>
+              <p className = "resolutionHomeError">Madarchood Badi Screen Pe Dekh !!!</p>
 
                 <div className = "container center-div">
                 {/* <div className = "settingSearch text-center">
@@ -259,7 +278,7 @@ class Home extends React.Component {
                    
                 </div>
 
-              </div>
+              </div>)
             )
           }
 }

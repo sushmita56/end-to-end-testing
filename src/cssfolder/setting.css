@@ -5,8 +5,9 @@
 
 .setting-heading-div {
   background-color: #ed1c24;
-  width: 20%;
-  margin: auto;
+  /* width: 20%; */
+  width: 300px;
+  /* margin: auto; */
 }
 
 .setting-heading {

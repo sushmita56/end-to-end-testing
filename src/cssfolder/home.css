@@ -18,6 +18,7 @@
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  animation: bg 1.4s cubic-bezier(0, 0.2, 0.8, 1);
 }
 
 .pagination {
@@ -144,5 +145,59 @@
 
   .resolutionHomeError {
     display: block;
+  }
+}
+
+/* loading css */
+
+@keyframes bg {
+  0% {
+    background: rgb(255, 255, 255);
+  }
+  100% {
+    background: #fff;
+  }
+}
+
+.loading {
+  /* display: inline-block;
+  position: relative; */
+  position: absolute;
+  /* width: 100%; */
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  /* width: 64px;
+  height: 64px; */
+}
+.loading div {
+  position: absolute;
+
+  background: rgb(0, 0, 0);
+  opacity: 1;
+  border-radius: 50%;
+  animation: loading 1.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loading div:nth-child(2) {
+  animation-delay: -0.7s;
+}
+@keyframes loading {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
   }
 }

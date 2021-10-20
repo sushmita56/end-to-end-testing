@@ -76,11 +76,12 @@ class Setting extends Component{
         return(
             <div className = "setting-main-div">
 
-                     <div className = "setting-heading-div text-center">
-                        <h2 className = "setting-heading">Change Your Credential</h2>
-                    </div>
+                    
 
                         <div className = "setting-info-div">
+                        <div className = "setting-heading-div text-center">
+                        <h2 className = "setting-heading">Change Your Credential</h2>
+                    </div>
                         <form onSubmit={(event) => this.changeSetting()} >
                             <div className = "info-div">
                                 <lable>
