@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {Redirect, useHistory } from 'react-router-dom';
 import '../cssfolder/setting.css'
+import ReactModal from 'react-modal';
+import SadEmoji from '../images/sad.png'
 
 
 class Setting extends Component{
@@ -11,7 +13,10 @@ class Setting extends Component{
             user_id : "",
             newUsername: "",    
             newPassword :"",
-            confirmPassword :""
+            confirmPassword :"",
+            settingErrorMessage :"",
+            showModal: false,
+            showModalSuccessfull:false
         }
     }
 
@@ -30,36 +35,108 @@ class Setting extends Component{
         
     }
 
+    handleCloseModal = () => {
+        this.setState({
+          showModal:false
+        })
+      }
+    
+      handleOkButton = () => {
+        this.props.history.push("/home");
+      }
+
     changeSetting = async (e) =>{
         // change setting button handler
         e.preventDefault()
 
-        const{user_id,newUsername, newPassword} = this.state
+        const{user_id,newUsername, newPassword,confirmPassword} = this.state
 
-        const res = await fetch("/changesetting",{
-            method:"POST",
-            headers:{
-              'Content-Type' : 'application/json'
-            },
-            body:JSON.stringify({
+        // validation starts here
 
-                user_id:user_id,
-                newUsername:newUsername,
-                newPassword:newPassword
-                
+        if(user_id === "" || newUsername ==="" || newPassword === "" || confirmPassword ===""){
+            this.setState({
+                showModal:true,
+                settingErrorMessage:"Fileds cannot be left empty !!"
             })
-          })
+        }else if(user_id.length >4){
+            this.setState({
+                showModal:true,
+                settingErrorMessage:"Invalid User ID !!"
+            })
+        }else if(newPassword !== confirmPassword){
+            this.setState({
+                showModal:true,
+                settingErrorMessage:"Password did not match !!"
+            })
+        }else {
 
-          const data = await res.json();
+            const res = await fetch("/changesetting",{
+                method:"POST",
+                headers:{
+                  'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify({
+    
+                    user_id:user_id,
+                    newUsername:newUsername,
+                    newPassword:newPassword
+                    
+                })
+              })
+    
+              const data = await res.json();
+              console.log(JSON.stringify(data.status))  
+              if(JSON.stringify(data.status) === "400"){
+                this.setState({
+                    showModal:true,
+                    settingErrorMessage:JSON.stringify(data.response)
+                })
+              }else if(JSON.stringify(data.status) === "401" )
+              {
+                this.setState({
+                    showModal:true,
+                    settingErrorMessage:JSON.stringify(data.response)
+                })
+              }else{
+                this.setState({
+                    showModalSuccessfull:true,
+                    settingErrorMessage:JSON.stringify(data.response)
+                })
+              }
+            
 
-          if(!data){
-            window.alert("Registration Failed!!!");
+        }
 
-          }else{
-            window.alert(JSON.stringify(data.response));
-            this.props.history.push("/home");
 
-          }
+
+
+
+
+
+        // const res = await fetch("/changesetting",{
+        //     method:"POST",
+        //     headers:{
+        //       'Content-Type' : 'application/json'
+        //     },
+        //     body:JSON.stringify({
+
+        //         user_id:user_id,
+        //         newUsername:newUsername,
+        //         newPassword:newPassword
+                
+        //     })
+        //   })
+
+        //   const data = await res.json();
+
+        //   if(!data){
+        //     window.alert("Registration Failed!!!");
+
+        //   }else{
+        //     window.alert(JSON.stringify(data.response));
+        //     this.props.history.push("/home");
+
+        //   }
     }
 
     render(){
@@ -149,22 +226,40 @@ class Setting extends Component{
                             </form>
                         </div>
 
-                   
+                     {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.settingErrorMessage}</p>
+               <img className = "sademoji"  src = {SadEmoji}></img>
+              </div>
+            
+             </ReactModal>}
+
+              {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModalSuccessfull}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.settingErrorMessage}</p>
+               <button className = "okButton" onClick = {this.handleOkButton}>OK</button> 
+               
+              </div>
+            
+             </ReactModal>}
 
             </div>
-                /* <form onSubmit={(event) => this.changeSetting()} >
-
-               <br></br>
-        
-         <br></br>
-
-         
-          <br></br>
-            <br></br>
-          <input type = "submit" value = "Change"  onClick = {e => this.changeSetting(e)} />
-          <button onClick = {() => this.handleCancel()} >Cancel</button>
-        
-        </form> */
            
         )
     }

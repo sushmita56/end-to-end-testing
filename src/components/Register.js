@@ -246,20 +246,6 @@ class Register extends React.Component {
         }
       }
     }
-
-
-
-
-
-    // const data = await res.json();
-    // if (data.status === 422 || !data) {
-    //   window.alert("Failed");
-    //   console.log("Registration failed");
-    // } else {
-    //   window.alert("Successfull !!!");
-    //   this.props.history.push("/home");
-    //   console.log("Registration successfull");
-    // }
   };
 
   render() {
