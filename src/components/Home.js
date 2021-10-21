@@ -19,6 +19,8 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { color } from '@mui/system';
 import { time } from 'faker';
+import ReactModal  from 'react-modal';
+
 
 const Loading =()=>
   <div className="loading">
@@ -40,6 +42,8 @@ class Home extends React.Component {
       page:0,
       rowsPerPage:7,
       homeLoading: true,
+      showModalSuccessfull:false,
+      deleteMessage :"",
      
     }
   
@@ -97,18 +101,39 @@ class Home extends React.Component {
   handleRegister = (e) => {
     this.props.history.push("/register");
   }
+  handleCloseModal = () => {
+    this.setState({
+      showModalSuccessfull:false
+    })
+  }
+
+  handleOkButton = () => {
+    this.props.history.push("/");
+  }
 
   handleDelete = async (user_id) =>{
-    window.alert(user_id + "data has been deleted from database!!") 
-
+    // window.alert(user_id + "data has been deleted from database!!") 
+  
+    const data = await fetch(`delete/${user_id}`);
     try {
 
-     await fetch(`delete/${user_id}`);
+     if(data){
+      this.setState({
+        deleteMessage:"User Delete Successfull !!",
+        showModalSuccessfull:true,
+      })
+
+     }
 
       
     } catch (error) {
 
-      console.log(error)
+      this.setState({
+        showModalSuccessfull:true,
+        deleteMessage:"Problem occured during delete !!!"
+
+      })
+      
       
     }
   } 
@@ -245,7 +270,7 @@ class Home extends React.Component {
                         <TableCell>{user.phone}</TableCell>
                         <TableCell><Link className = "details" to = {`/viewdetails/${user._id}`}>Details</Link></TableCell> 
                         <TableCell><Link className = "edit" to = {`/update/${user._id}`}>Edit</Link></TableCell>
-                        <TableCell><Link className = "delete" to ={`/`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></TableCell>
+                        <TableCell><Link className = "delete" to ={`/home`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
@@ -277,6 +302,22 @@ class Home extends React.Component {
                
                    
                 </div>
+                 {/* modal dialog */
+              
+              <ReactModal 
+              isOpen={this.state.showModalSuccessfull}
+              contentLabel="Minimal Modal Example"
+              className="Modal"
+              overlayClassName="Overlay"
+              // onRequestClose={this.handleCloseModal}
+           >
+             <div className = "modaldiv text-center">
+               <p>{this.state.deleteMessage}</p>
+               <button className = "okButton" onClick = {this.handleOkButton}>OK</button> 
+               
+              </div>
+            
+             </ReactModal>}
 
               </div>)
             )

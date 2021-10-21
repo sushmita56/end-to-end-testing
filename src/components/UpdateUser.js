@@ -290,55 +290,7 @@ var ielts,destination,qualification
 
        
       }
-    }
-
-  
-
-//   const ielts = this.state.ielts.value
-//   const destination =  this.state.destination.value
-//   const qualification = this.state.qualification.value
-
-//   console.log(this.state.ielts.value)
-
-
-  // update validation same as registration validation
-
-  
-
-    // const res = await fetch(`/update/${this.props.match.params.id}`,{
-    //   method:"POST",
-    //   headers:{
-    //     'Content-Type' : 'application/json'
-    //   },
-    //   body:JSON.stringify({
-    //     name:name,
-    //     email:email,
-    //     phone:phone,
-    //     destination:destination,
-    //     qualification :qualification,
-    //     address:address,
-    //     percentage:percentage,
-    //     ielts:ielts,
-    //     listening:listening,
-    //     reading:reading,
-    //     writing:writing,
-    //     speaking:speaking,
-    //     overallband:overallband
-    //   })
-    // })
-
-    // const data = await res.json();
-    // if(data.status === 422 || !data)
-    // {
-    //   window.alert("Failed");
-    //   console.log("Update Successfull!!! ");
-    // }else{
-    //   window.alert("Successfull !!!");
-    //   this.props.history.push("/home");
-    //   console.log("Update Successfull!!");
-    // }
-
-   
+    }   
 }
 
 
