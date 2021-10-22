@@ -30,6 +30,8 @@ class Login extends React.Component {
       loggedIn
      
     }
+
+    this.HOMEURL = "https://wave-entry-server.herokuapp.com"
     this.loginHandler = this.loginHandler.bind(this);
   }
 
