@@ -31,7 +31,8 @@ class Login extends React.Component {
      
     }
 
-    this.HOMEURL = "https://wave-entry-server.herokuapp.com"
+    this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
+    this.HOMEURL = "http://localhost:5000/"
     this.loginHandler = this.loginHandler.bind(this);
   }
 
@@ -46,7 +47,6 @@ class Login extends React.Component {
     // condition for validation
     const {username,password} = this.state
 
-   
 
     if(username === "" && password === ""){
       this.setState({
@@ -66,7 +66,7 @@ class Login extends React.Component {
     }else{
 
 
-      const res = await fetch("/",{
+      const res = await fetch(`${this.HEROKUURL}`,{
         method:"POST",
         headers:{
           'Content-Type' : 'application/json'
