@@ -157,10 +157,10 @@ class Setting extends Component{
 
                     
 
-                        <div className = "setting-info-div">
+                    <div className = "setting-info-div">
                         <div className = "setting-heading-div text-center">
-                        <h2 className = "setting-heading">Change Your Credential</h2>
-                    </div>
+                         <h2 className = "setting-heading">Change Your Credential</h2>
+                        </div>
                         <form onSubmit={(event) => this.changeSetting()} >
                             <div className = "info-div">
                                 <lable style = {{fontSize:"14px"}}>
@@ -222,9 +222,26 @@ class Setting extends Component{
 
                                 />
                             </div>
-                            <button className = "backSetting" onClick = {() => this.handleCancel()} >Back</button>
 
-                            <input className = "changeSetting" type = "submit" value = "Change"  onClick = {e => this.changeSetting(e)} />
+                            <div className = "settingButtonDiv">
+
+                                <div className = "row" >
+
+                                    <div className = "col-6">
+                                    <button className = "backSetting" onClick = {() => this.handleCancel()} >Back</button>
+
+                                    </div>
+
+                                    <div className = "col-6">
+                                    <input className = "changeSetting" type = "submit" value = "Change"  onClick = {e => this.changeSetting(e)} />
+
+                                    </div>
+                                
+                                </div>
+
+                            </div>
+
+
                             </form>
                         </div>
 

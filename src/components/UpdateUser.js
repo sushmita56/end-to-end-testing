@@ -9,7 +9,7 @@ import SadEmoji from '../images/sad.png'
 const customStyles = {
   container: provided => ({
     ...provided,
-    width: 230,
+    width: "100%",
     padding:2
   })
 };
@@ -366,7 +366,7 @@ async componentDidMount()
 
 
 
-      <div className="container main-register-div" style = {{marginTop:this.state.margin}}>
+      <div className="main-register-div" style = {{marginTop:this.state.margin}}>
         <div className = "register-heading-div text-center">
           <h2 className = "register-heading">Update Student Details</h2>
         </div>
@@ -521,30 +521,30 @@ async componentDidMount()
               <div className = "row">
 
                 <div className = "col-3">
-                <lable style = {{fontSize:"14px"}}>
+                <lable style = {{fontSize:"12px"}}>
                  Listening <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                 <input value = {this.state.listening} className="listening-input" type ="text"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
 
                 </div>
                 <div className = "col-3">
-                <lable>
+                <lable style = {{fontSize:"12px"}}>
                  Reading <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                 <input value = {this.state.reading} className="reading-input" type ="text"  onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
-                  <lable style = {{fontSize:"14px"}} >
+                  <lable style = {{fontSize:"12px"}} >
                  Writing <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                   <input value = {this.state.writing} className="writing-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
-                  <lable style = {{fontSize:"14px"}}>
+                  <lable style = {{fontSize:"12px"}}>
                  Speaking <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                   <input value = {this.state.speaking} className="speaking-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
 
                   </div>
@@ -555,7 +555,7 @@ async componentDidMount()
               <div className =  "row m-4">
 
                 <div className = "col-12">
-                <lable style = {{fontSize:"14px"}}>
+                <lable style = {{fontSize:"12px"}}>
                  Overall Band <span style={{ color: "red" }}>*</span>
               </lable><br></br>
                   <input value = {this.state.overallband} className = "overallband-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
@@ -571,8 +571,20 @@ async componentDidMount()
           }
           </div>
 
-          <div className = "text-center">
-           <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Update</button>
+          <div className = "button-div">
+             <div className = "row">
+
+               <div className = "col-6">
+               <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button>
+
+               </div>
+
+               <div className = "col-6">
+               <button className = "register-Button" onClick = {this.handleDataEntry}>Update</button>
+               </div>
+
+             </div>
+     
           </div>
 
            {/* modal dialog */
