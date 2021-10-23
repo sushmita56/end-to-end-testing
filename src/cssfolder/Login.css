@@ -27,14 +27,14 @@
   padding: 8px 10px;
   margin: 8px 0;
   /* box-sizing: border-box; */
-  border: 2px solid #ccc;
+  border: 1px solid rgb(75, 75, 75);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
 
 .username:focus {
-  border: 2px solid #555;
+  border: 1px solid rgb(23, 74, 204);
 }
 
 .password {
@@ -43,14 +43,14 @@
   padding: 8px 10px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 1px solid rgb(75, 75, 75);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
 
 .password:focus {
-  border: 2px solid #555;
+  border: 1px solid rgb(23, 74, 204);
 }
 
 .submitbutton {

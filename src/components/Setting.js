@@ -18,6 +18,8 @@ class Setting extends Component{
             showModal: false,
             showModalSuccessfull:false
         }
+        this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
+        this.HOMEURL = "http://localhost:5000/"
     }
 
     componentDidMount()
@@ -70,7 +72,7 @@ class Setting extends Component{
             })
         }else {
 
-            const res = await fetch("/changesetting",{
+            const res = await fetch(`${this.HEROKUURL}/changesetting`,{
                 method:"POST",
                 headers:{
                   'Content-Type' : 'application/json'
@@ -161,7 +163,7 @@ class Setting extends Component{
                     </div>
                         <form onSubmit={(event) => this.changeSetting()} >
                             <div className = "info-div">
-                                <lable>
+                                <lable style = {{fontSize:"14px"}}>
                                     User ID: <span style={{ color: "red" }}>*</span>
                                 </lable>{" "}
                                 <br></br>
@@ -175,7 +177,7 @@ class Setting extends Component{
                             </div>
 
                             <div className = "info-div">
-                                <lable>
+                                <lable style = {{fontSize:"14px"}}>
                                     Username: <span style={{ color: "red" }}></span>
                                 </lable>{" "}
                                 <br></br>
@@ -191,7 +193,7 @@ class Setting extends Component{
                             </div>
 
                             <div className = "info-div">
-                                <lable>
+                                <lable style = {{fontSize:"14px"}}>
                                     New Password: <span style={{ color: "red" }}>*</span>
                                 </lable>{" "}
                                 <br></br>
@@ -207,7 +209,7 @@ class Setting extends Component{
                             </div>
 
                             <div className = "info-div">
-                                <lable>
+                                <lable style = {{fontSize:"14px"}}>
                                     Confirm New Password: <span style={{ color: "red" }}>*</span>
                                 </lable>{" "}
                                 <br></br>

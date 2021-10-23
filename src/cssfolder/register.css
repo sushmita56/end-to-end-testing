@@ -19,7 +19,7 @@
 
 .name-input {
   width: 225px;
-  padding: 3.5px;
+  padding: 8px;
   margin-top: 5px;
   outline: none;
   box-sizing: border-box;
@@ -27,6 +27,7 @@
   -webkit-transition: 0.5s;
   transition: 0.5s;
   border-radius: 3px;
+  font-size: 13px;
 }
 
 .name-input:focus {

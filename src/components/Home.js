@@ -116,7 +116,7 @@ class Home extends React.Component {
   handleDelete = async (user_id) =>{
     // window.alert(user_id + "data has been deleted from database!!") 
   
-    const data = await fetch(`delete/${user_id}`);
+    const data = await fetch(`${this.HEROKUURL}/delete/${user_id}`);
     try {
 
      if(data){
@@ -202,7 +202,7 @@ class Home extends React.Component {
                   <input className = "searchInput" type = "text" placeholder = "Search By name....." onChange ={(e) => { this.setState({search: e.target.value})}} />
                   </div>
                   <div class="col-2">
-                  <button className = "registerButton" onClick = {this.handleRegister}> New Registration</button>
+                  <button className = "registerButton" onClick = {this.handleRegister}> Add Student</button>
                   </div>
                   <div class="col-1">
                   <Menu menuButton={  ({ open }) =><button className = "menuButton">{open ? <i className = "fa fa-close" />  :<i className = "fa fa-bars" />}  </button>}

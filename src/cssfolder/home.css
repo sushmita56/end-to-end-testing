@@ -53,14 +53,14 @@
   padding: 12px 20px;
   margin-top: 45px;
   box-sizing: border-box;
-  border: 2px solid rgb(155, 155, 155);
+  border: 1px solid rgb(155, 155, 155);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
 
 .searchInput:focus {
-  border: 2px solid rgb(55, 155, 232);
+  border: 1px solid rgb(55, 155, 232);
 }
 
 .homeLogo {
