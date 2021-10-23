@@ -9,7 +9,8 @@ import SadEmoji from '../images/sad.png'
 const customStyles = {
   container: provided => ({
     ...provided,
-    width: 300
+    width: 230,
+    padding:2
   })
 };
 
@@ -59,11 +60,14 @@ class UpdateUser extends React.Component {
       prevIelts:"",
       prevDestination:"",
       prevQualification:"",
-      margin :160,
+      margin :150,
       registrationErrorMessage :"",
       showModal: false,
       showModalSuccessfull:false
     };
+
+    this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
+    this.HOMEURL = "http://localhost:5000/"
  }
 
 
@@ -91,12 +95,12 @@ handleQualificationChange = qualification => {
   {
     this.setState({
       showOption:true,
-      margin:40
+      margin:25
 
     })
   }else{
     this.setState({
-      margin:160,
+      margin:150,
       showOption:false,
       listening :"",
       reading:"",
@@ -186,7 +190,7 @@ var ielts,destination,qualification
         })
       }else{
 
-      const res = await fetch(`/update/${this.props.match.params.id}`,{
+      const res = await fetch(`${this.HEROKUURL}/update/${this.props.match.params.id}`,{
       method:"POST",
       headers:{
         'Content-Type' : 'application/json'
@@ -252,7 +256,7 @@ var ielts,destination,qualification
           registrationErrorMessage:"Invalid Percentage!!"
         })
       }else {
-        const res = await fetch(`/update/${this.props.match.params.id}`,{
+        const res = await fetch(`${this.HEROKUURL}/update/${this.props.match.params.id}`,{
           method:"POST",
           headers:{
             'Content-Type' : 'application/json'
@@ -299,7 +303,7 @@ async componentDidMount()
 
     // console.log(this.props.match.params.id)
 
-    const response = await fetch(`/update/${this.props.match.params.id}`);
+    const response = await fetch(`${this.HEROKUURL}/update/${this.props.match.params.id}`);
       if(response){
         const data = await response.json();
         if(data){
@@ -315,7 +319,7 @@ async componentDidMount()
     if(this.state.editDetails.ielts === "yes"){
         this.setState({
             showOption:true,
-            margin:40
+            margin:25
 
         })
     }
@@ -368,8 +372,8 @@ async componentDidMount()
         </div>
         <div className="student-info-div">
           <div className="row">
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Name: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -385,7 +389,7 @@ async componentDidMount()
             </div>
 
             <div className="col-6">
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 Email: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -402,8 +406,8 @@ async componentDidMount()
           </div>
 
           <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Address: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -419,7 +423,7 @@ async componentDidMount()
             </div>
 
             <div className="col-6" >
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 Phone:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
@@ -437,8 +441,8 @@ async componentDidMount()
           </div>
 
           <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Qualification: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -453,7 +457,7 @@ async componentDidMount()
             </div>
 
             <div className="col-6" >
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 Percentage / GPA:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
@@ -471,8 +475,8 @@ async componentDidMount()
           </div>
 
           <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Destination: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -489,7 +493,7 @@ async componentDidMount()
             </div>
 
             <div className="col-6" >
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 IELTS:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
@@ -517,7 +521,7 @@ async componentDidMount()
               <div className = "row">
 
                 <div className = "col-3">
-                <lable>
+                <lable style = {{fontSize:"14px"}}>
                  Listening <span style={{ color: "red" }}>*</span>
               </lable>
                 <input value = {this.state.listening} className="listening-input" type ="text"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
@@ -531,14 +535,14 @@ async componentDidMount()
 
                   </div>
                   <div className = "col-3">
-                  <lable>
+                  <lable style = {{fontSize:"14px"}} >
                  Writing <span style={{ color: "red" }}>*</span>
               </lable>
                   <input value = {this.state.writing} className="writing-input" type ="text"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
-                  <lable>
+                  <lable style = {{fontSize:"14px"}}>
                  Speaking <span style={{ color: "red" }}>*</span>
               </lable>
                   <input value = {this.state.speaking} className="speaking-input" type ="text"  onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
@@ -551,7 +555,7 @@ async componentDidMount()
               <div className =  "row m-4">
 
                 <div className = "col-12">
-                <lable>
+                <lable style = {{fontSize:"14px"}}>
                  Overall Band <span style={{ color: "red" }}>*</span>
               </lable><br></br>
                   <input value = {this.state.overallband} className = "overallband-input" type ="text"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>

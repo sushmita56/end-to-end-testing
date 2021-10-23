@@ -56,6 +56,9 @@ class Register extends React.Component {
       showModal: false,
       showModalSuccessfull:false
     };
+
+    this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
+    this.HOMEURL = "http://localhost:5000/"
   }
 
   handleDestinationChange = (destination) => {
@@ -85,7 +88,7 @@ class Register extends React.Component {
   //required function
 
   handleCancel = (e) => {
-    this.props.history.push("/home");
+    this.props.history.push(`/home`);
   };
 
 
@@ -96,7 +99,7 @@ class Register extends React.Component {
   }
 
   handleOkButton = () => {
-    this.props.history.push("/home");
+    this.props.history.push(`/home`);
   }
 
   handleDataEntry = async () => {
@@ -145,7 +148,7 @@ class Register extends React.Component {
         })
       }else{
 
-        const res = await fetch("/register", {
+        const res = await fetch(`${this.HEROKUURL}/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -211,7 +214,7 @@ class Register extends React.Component {
           registrationErrorMessage:"Invalid Percentage!!"
         })
       }else {
-        const res = await fetch("/register", {
+        const res = await fetch(`${this.HEROKUURL}/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
