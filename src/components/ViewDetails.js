@@ -14,7 +14,7 @@ class ViewDetails extends React.Component {
    this.state = {
      individualUserData : [],
      showIeltsScore:false,
-     topMargin:"55%",
+     topMargin:"10%",
    }
    this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
     this.HOMEURL = "http://localhost:5000/"
@@ -37,7 +37,7 @@ class ViewDetails extends React.Component {
         if(this.state.individualUserData.ielts === "yes"){
           this.setState({
             showIeltsScore:true,
-            topMargin:"45%"
+            topMargin:"3%"
          });
         }
   }
@@ -60,33 +60,33 @@ handleGoBack = () => {
     const {individualUserData, topMargin} = this.state
     return(
      
-          <div className =  "detail-center-div" style = {{top:topMargin}}> 
+          <div className =  "detail-center-div" style = {{marginTop:topMargin}}> 
 
-              <div className = "container header-div text-center">
+              <div className = "header-div text-center">
                   <h1 className = "heading">Individual Details</h1>
               </div>
-              <div className = "details-div">
+              <div className = "container details-div">
 
                   {/* <div class=" info-details "> */}
 
-                    <div className ="row ">
+                    <div className ="row">
 
                       <div className  ="col-6 text-center">
-                          <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>NAME:</p> 
+                          <p>NAME:</p> 
                       </div>
-                      <div className  ="col-6 text-left">
-                         <p style = {{textIndent:"4em"}}> {individualUserData.name}</p>
+                      <div className  ="col-6 text-center">
+                         <p> {individualUserData.name}</p>
                       </div>
 
                     </div>
 
                     <div className ="row ">
 
-                        <div className  ="col-6 text-center">
-                            <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>EMAIL:</p> 
+                        <div className  ="col-6 text-center" >
+                            <p>EMAIL:</p> 
                         </div>
-                        <div className  ="col-6 text-left">
-                          <p style = {{textIndent:"4em"}}> {individualUserData.email}</p>
+                        <div className  ="col-6 text-center">
+                          <p > {individualUserData.email}</p>
                         </div>
 
                       </div>
@@ -94,10 +94,10 @@ handleGoBack = () => {
                       <div className ="row ">
 
                         <div className  ="col-6 text-center">
-                            <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>ADDRESS:</p> 
+                            <p >ADDRESS:</p> 
                         </div>
-                        <div className  ="col-6 text-left">
-                          <p style = {{textIndent:"4em"}}> {individualUserData.address}</p>
+                        <div className  ="col-6 text-center">
+                          <p > {individualUserData.address}</p>
                         </div>
 
                       </div>
@@ -105,10 +105,10 @@ handleGoBack = () => {
                       <div className ="row ">
 
                         <div className  ="col-6 text-center">
-                            <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>PHONE:</p> 
+                            <p >PHONE:</p> 
                         </div>
-                        <div className  ="col-6 text-left">
-                          <p style = {{textIndent:"4em"}}> {individualUserData.phone}</p>
+                        <div className  ="col-6 text-center">
+                          <p > {individualUserData.phone}</p>
                         </div>
 
                         </div>
@@ -116,10 +116,10 @@ handleGoBack = () => {
                         <div className ="row ">
 
                               <div className  ="col-6 text-center">
-                                  <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>DESTINATION:</p> 
+                                  <p>DESTINATION:</p> 
                               </div>
-                              <div className  ="col-6 text-left">
-                                <p style = {{textIndent:"4em"}}> {individualUserData.destination}</p>
+                              <div className  ="col-6 text-center">
+                                <p > {individualUserData.destination}</p>
                               </div>
 
                         </div>
@@ -127,30 +127,30 @@ handleGoBack = () => {
                         <div className ="row ">
 
                           <div className  ="col-6 text-center">
-                              <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>QUALIFICATION:</p> 
+                              <p >QUALIFICATION:</p> 
                           </div>
-                          <div className  ="col-6 text-left">
-                            <p style = {{textIndent:"4em"}}> {individualUserData.qualification}</p>
+                          <div className  ="col-6 text-center">
+                            <p > {individualUserData.qualification}</p>
                           </div>
 
                           </div>
                           <div className ="row ">
 
                             <div className  ="col-6 text-center">
-                                <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>PERCENTAGE/GPA:</p> 
+                                <p >PERCENTAGE/GPA:</p> 
                             </div>
-                            <div className  ="col-6 text-left">
-                              <p style = {{textIndent:"4em"}}> {individualUserData.percentage}</p>
+                            <div className  ="col-6 text-center">
+                              <p > {individualUserData.percentage}</p>
                             </div>
 
                             </div>
                           <div className ="row ">
 
                           <div className  ="col-6 text-center">
-                              <p style = {{fontWeight:"bold",color:"#2c2c2c",textIndent:"9em"}}>IELTS</p> 
+                              <p >IELTS</p> 
                           </div>
-                          <div className  ="col-6 text-left">
-                            <p style = {{textIndent:"4em"}}> {individualUserData.ielts}</p>
+                          <div className  ="col-6 text-center">
+                            <p> {individualUserData.ielts}</p>
                           </div>
 
                           </div>
@@ -158,25 +158,25 @@ handleGoBack = () => {
                           {this.state.showIeltsScore &&
                             <div className = "text-center">
 
-                                   <p style = {{fontWeight:"bold",color:"#0000FF" }}><u>IELTS SCORE:</u></p>
+                                   <p style = {{color:"#0000FF" }}><u>IELTS SCORE:</u></p>
                                    <div className = "row">
 
                                       <div className = "col-3">
-                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>LISTENING&nbsp;:&nbsp;</span>{individualUserData.listening}</p>
+                                        <p><span style = {{color:"#2c2c2c"}}>Listening&nbsp;:&nbsp;</span>{individualUserData.listening}</p>
                                       </div>
                                       <div className = "col-3">
-                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>READING&nbsp;:&nbsp;</span>{individualUserData.reading}</p>
+                                        <p><span style = {{color:"#2c2c2c"}}>Reading&nbsp;:&nbsp;</span>{individualUserData.reading}</p>
                                       </div>
                                       <div className = "col-3">
-                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>WRITING&nbsp;:&nbsp;</span>{individualUserData.writing}</p>
+                                        <p><span style = {{color:"#2c2c2c"}}>Writing&nbsp;:&nbsp;</span>{individualUserData.writing}</p>
                                       </div>
                                       <div className = "col-3">
-                                        <p><span style = {{fontWeight:"bold",color:"#2c2c2c"}}>SPEAKING&nbsp;:&nbsp;</span>{individualUserData.speaking}</p>
+                                        <p><span style = {{color:"#2c2c2c"}}>Speaking&nbsp;:&nbsp;</span>{individualUserData.speaking}</p>
                                       </div>
 
                                    </div>
 
-                                   <p><span style = {{fontWeight:"bold",color:"#00A36C"}}>OVERALL BAND  &nbsp;:&nbsp;</span>{individualUserData.overallband}</p>
+                                   <p><span style = {{color:"#00A36C"}}>Overall Band&nbsp;:&nbsp;</span>{individualUserData.overallband}</p>
 
 
                             </div>

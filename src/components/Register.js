@@ -10,7 +10,7 @@ import SadEmoji from '../images/sad.png'
 const customStyles = {
   container: provided => ({
     ...provided,
-    width: 230,
+    width: "100%",
     padding:2
   })
 };
@@ -259,7 +259,7 @@ class Register extends React.Component {
 
     const { ielts, destination, qualification } = this.state;
     return (
-      <div className="container main-register-div" style = {{marginTop:this.state.margin}}>
+      <div className="main-register-div" style = {{marginTop:this.state.margin}}>
         <div className = "register-heading-div text-center">
           <h2 className = "register-heading">Register New Student</h2>
         </div>
@@ -404,35 +404,35 @@ class Register extends React.Component {
         <div className = "ielts-score-div">
           {this.state.showOption &&
            <div className = "ielts-input-div">
-             <p style = {{fontSize:"18px"}}>Please enter your ielts score</p>
+             <p style = {{fontSize:"16px"}}>Please enter your ielts score</p>
 
-              <div className = "row">
+              <div className = "row" >
 
                 <div className = "col-3">
-                <lable style = {{fontSize:"14px"}}>
+                <lable style = {{fontSize:"12px"}}>
                  Listening <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                 <input className="listening-input"  type="number"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
 
                 </div>
                 <div className = "col-3">
-                <lable>
+                <lable  style = {{fontSize:"12px"}}>
                  Reading <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                 <input className="reading-input"  type="number"  onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
-                  <lable style = {{fontSize:"14px"}}>
+                  <lable style = {{fontSize:"12px"}}>
                  Writing <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                   <input className="writing-input"  type="number"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
 
                   </div>
                   <div className = "col-3">
-                  <lable>
+                  <lable  style = {{fontSize:"12px"}}>
                  Speaking <span style={{ color: "red" }}>*</span>
-              </lable>
+              </lable><br></br>
                   <input className="speaking-input"  type="number" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
 
                   </div>
@@ -454,8 +454,20 @@ class Register extends React.Component {
           }
           </div>
 
-          <div className = "text-center">
-           <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button><button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
+          <div className = "button-div">
+             <div className = "row">
+
+               <div className = "col-6">
+               <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button>
+
+               </div>
+
+               <div className = "col-6">
+               <button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
+               </div>
+
+             </div>
+     
           </div>
 
            {/* modal dialog */
