@@ -46,6 +46,8 @@ class Home extends React.Component {
       deleteMessage :"",
      
     }
+    this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
+    this.HOMEURL = "http://localhost:5000/"
   
   }
 
@@ -58,13 +60,13 @@ class Home extends React.Component {
  this.isLoading = setTimeout(()=>{this.setState({homeLoading: false})}, 2300);
 
 
-  const response = await fetch("/home");
+  const response = await fetch(`${this.HEROKUURL}/home`);
   if(response){
     const data = await response.json();
     if(data){
       this.setState({
         allUser: data,
-        DataisLoaded: true,
+        DataisLoaded:true,
         search:"",
         
     });
@@ -237,18 +239,18 @@ class Home extends React.Component {
                 </div>
 
                 <div className =  "wholeTable">
-                <TableContainer style={{height:550,width:"94%", marginTop:30}}>
+                <TableContainer style={{height:480,width:"96%", marginTop:28}}>
                   <Table>
                      <TableHead>
                      <TableRow className = "tableHeading">
-                         <TableCell style = {{padding:"16px", color:"white"}}>S.N.</TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}>NAME</TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}>EMAIL</TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}>ADDRESS</TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}>PHONE</TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}></TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}></TableCell>
-                         <TableCell style = {{padding:"16px", color:"white"}}></TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px" , textAlign:"center"}}>S.N.</TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}>NAME</TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}>EMAIL</TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}>ADDRESS</TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}>PHONE</TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}></TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}></TableCell>
+                         <TableCell style = {{padding:"12px", color:"white",fontSize:"12px", textAlign:"center"}}></TableCell>
                      </TableRow>
                      </TableHead>
                      <TableBody>
@@ -263,11 +265,11 @@ class Home extends React.Component {
                      })
                      .map((user) => (
                         <TableRow key={user.id} >
-                        <TableCell style = {{padding:"22px"}} >{i++}</TableCell >
-                        <TableCell >{user.name}</TableCell>
-                        <TableCell>{user.email}</TableCell>
-                        <TableCell>{user.address}</TableCell>
-                        <TableCell>{user.phone}</TableCell>
+                        <TableCell style = {{padding:"20px",fontSize:"13px"}} >{i++}</TableCell >
+                        <TableCell style = {{padding:"20px",fontSize:"13px"}}>{user.name}</TableCell>
+                        <TableCell style = {{padding:"20px",fontSize:"13px"}}>{user.email}</TableCell>
+                        <TableCell style = {{padding:"20px",fontSize:"13px"}}>{user.address}</TableCell>
+                        <TableCell style = {{padding:"20px",fontSize:"13px"}}>{user.phone}</TableCell>
                         <TableCell><Link className = "details" to = {`/viewdetails/${user._id}`}>Details</Link></TableCell> 
                         <TableCell><Link className = "edit" to = {`/update/${user._id}`}>Edit</Link></TableCell>
                         <TableCell><Link className = "delete" to ={`/home`} onClick = {() => this.handleDelete(user._id)} >Delete</Link></TableCell>
