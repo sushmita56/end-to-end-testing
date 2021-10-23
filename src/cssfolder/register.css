@@ -1,41 +1,41 @@
 .main-register-div {
   /* background-color: red; */
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(29, 25, 25); */
 }
 
 .register-heading-div {
   background-color: #ed1c24;
-  width: 48%;
+  width: 43%;
   margin: auto;
 }
 
 .register-heading {
   color: white;
-  font-size: 18px;
-  padding: 12px;
+  font-size: 15px;
+  padding: 10px;
   text-align: center;
 }
 
 .student-info-div {
   /* background-color: brown; */
-  width: 65%;
+  width: 43%;
   margin: auto;
 }
 
 .name-input {
-  width: 300px;
-  padding: 4px;
+  width: 225px;
+  padding: 3.5px;
   margin-top: 5px;
   outline: none;
   box-sizing: border-box;
-  border: 2px solid rgb(213, 211, 211);
+  border: 1px solid rgb(213, 211, 211);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   border-radius: 3px;
 }
 
 .name-input:focus {
-  border: 2px solid rgb(27, 120, 220);
+  border: 1px solid rgb(27, 120, 220);
 }
 
 .ielts-score-div {
@@ -56,26 +56,26 @@
 .writing-input,
 .speaking-input {
   width: 60px;
-  padding: 4px;
-  margin: 5px;
+  padding: 3px;
+  /* margin: 2px; */
   outline: none;
   box-sizing: border-box;
-  border: 2px solid rgb(213, 211, 211);
+  border: 1px solid rgb(213, 211, 211);
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  border-radius: 3px;
+  border-radius: 1px;
 }
 
 .overallband-input {
   width: 80px;
-  padding: 5px;
-  margin: 5px;
+  padding: 4px;
+  /* margin: 5px; */
   outline: none;
   box-sizing: border-box;
-  border: 2px solid rgb(213, 211, 211);
+  border: 1px solid rgb(213, 211, 211);
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  border-radius: 3px;
+  border-radius: 1px;
 }
 
 .cancelButton,
@@ -83,8 +83,8 @@
   background-color: #ed1c24;
   border: none;
   color: white;
-  height: 42px;
-  width: 305px;
+  height: 37px;
+  width: 230px;
   text-decoration: none;
   cursor: pointer;
 }

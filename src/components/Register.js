@@ -10,7 +10,8 @@ import SadEmoji from '../images/sad.png'
 const customStyles = {
   container: provided => ({
     ...provided,
-    width: 300
+    width: 230,
+    padding:2
   })
 };
 
@@ -50,7 +51,7 @@ class Register extends React.Component {
       writing: "",
       speaking: "",
       overallband: "",
-      margin :160,
+      margin :150,
       registrationErrorMessage :"",
       showModal: false,
       showModalSuccessfull:false
@@ -71,12 +72,12 @@ class Register extends React.Component {
     if (ielts.value === "yes") {
       this.setState({
         showOption: true,
-        margin:60
+        margin:25
       });
     } else {
       this.setState({
         showOption: false,
-        margin:160
+        margin:150
       });
     }
   };
@@ -261,8 +262,8 @@ class Register extends React.Component {
         </div>
         <div className="student-info-div">
           <div className="row">
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Name: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -277,7 +278,7 @@ class Register extends React.Component {
             </div>
 
             <div className="col-6">
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 Email: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -293,8 +294,8 @@ class Register extends React.Component {
           </div>
 
           <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Address: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -309,7 +310,7 @@ class Register extends React.Component {
             </div>
 
             <div className="col-6" >
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 Phone:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
@@ -327,8 +328,8 @@ class Register extends React.Component {
           </div>
 
           <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Qualification: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -343,7 +344,7 @@ class Register extends React.Component {
             </div>
 
             <div className="col-6" >
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 Percentage / GPA:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
@@ -360,8 +361,8 @@ class Register extends React.Component {
           </div>
 
           <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{paddingLeft:"130px"}}>
-              <lable>
+            <div className="col-6" style = {{}}>
+              <lable style = {{fontSize:"14px"}}>
                 Destination: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -377,7 +378,7 @@ class Register extends React.Component {
             </div>
 
             <div className="col-6" >
-              <lable>
+              <lable style = {{fontSize:"14px"}}>
                 IELTS:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
@@ -405,7 +406,7 @@ class Register extends React.Component {
               <div className = "row">
 
                 <div className = "col-3">
-                <lable>
+                <lable style = {{fontSize:"14px"}}>
                  Listening <span style={{ color: "red" }}>*</span>
               </lable>
                 <input className="listening-input"  type="number"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
@@ -419,7 +420,7 @@ class Register extends React.Component {
 
                   </div>
                   <div className = "col-3">
-                  <lable>
+                  <lable style = {{fontSize:"14px"}}>
                  Writing <span style={{ color: "red" }}>*</span>
               </lable>
                   <input className="writing-input"  type="number"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
@@ -439,7 +440,7 @@ class Register extends React.Component {
               <div className =  "row m-4">
 
                 <div className = "col-12">
-                <lable>
+                <lable style = {{fontSize:"14px"}}>
                  Overall Band <span style={{ color: "red" }}>*</span>
               </lable><br></br>
                   <input className = "overallband-input"  type="number"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
