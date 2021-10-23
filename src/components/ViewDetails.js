@@ -16,6 +16,8 @@ class ViewDetails extends React.Component {
      showIeltsScore:false,
      topMargin:"55%",
    }
+   this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
+    this.HOMEURL = "http://localhost:5000/"
   }
 
 
@@ -23,7 +25,7 @@ class ViewDetails extends React.Component {
   {
     console.log(this.props.match.params.id)
 
-    const response = await fetch(`/viewdetails/${this.props.match.params.id}`);
+    const response = await fetch(`${this.HEROKUURL}/viewdetails/${this.props.match.params.id}`);
       if(response){
         const data = await response.json();
         if(data){
