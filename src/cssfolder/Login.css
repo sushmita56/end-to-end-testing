@@ -12,7 +12,7 @@
 }
 
 .loginlogo {
-  width: 35%;
+  width: 29%;
 }
 
 .formdiv {
@@ -22,40 +22,40 @@
 /* login input field */
 
 .username {
-  width: 20%;
-  height: 42px;
-  padding: 12px 20px;
+  width: 19%;
+  height: 39px;
+  padding: 8px 10px;
   margin: 8px 0;
-  box-sizing: border-box;
-  border: 3px solid #ccc;
+  /* box-sizing: border-box; */
+  border: 2px solid #ccc;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
 
 .username:focus {
-  border: 3px solid #555;
+  border: 2px solid #555;
 }
 
 .password {
-  width: 20%;
-  padding: 12px 20px;
-  height: 42px;
+  width: 19%;
+  height: 39px;
+  padding: 8px 10px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: 3px solid #ccc;
+  border: 2px solid #ccc;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
 
 .password:focus {
-  border: 3px solid #555;
+  border: 2px solid #555;
 }
 
 .submitbutton {
-  width: 20%;
-  height: 48px;
+  width: 19%;
+  height: 42px;
   background-color: #ed1c24;
   border: none;
   color: white;
