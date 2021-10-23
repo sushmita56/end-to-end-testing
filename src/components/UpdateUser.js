@@ -378,7 +378,7 @@ async componentDidMount()
               </lable>{" "}
               <br></br>
               <input
-              value = {this.state.name}
+                value = {this.state.name}
                 className="name-input"
                 type="text"
                 onChange={(e) => {
@@ -398,7 +398,7 @@ async componentDidMount()
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ email: e.target.value });
                 }}
                 placeholder=""
               />
@@ -416,7 +416,7 @@ async componentDidMount()
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ address: e.target.value });
                 }}
                 placeholder=""
               />
@@ -433,7 +433,7 @@ async componentDidMount()
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ phone: e.target.value });
                 }}
                 placeholder=""
               />
@@ -467,7 +467,7 @@ async componentDidMount()
                 className="name-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({ name: e.target.value });
+                  this.setState({ percentage: e.target.value });
                 }}
                 placeholder=""
               />
