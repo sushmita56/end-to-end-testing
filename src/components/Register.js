@@ -4,15 +4,15 @@ import { Redirect, useHistory } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 import "../cssfolder/register.css";
-import ReactModal from 'react-modal';
-import SadEmoji from '../images/sad.png'
+import ReactModal from "react-modal";
+import SadEmoji from "../images/sad.png";
 
 const customStyles = {
-  container: provided => ({
+  container: (provided) => ({
     ...provided,
     width: "100%",
-    padding:2
-  })
+    padding: 2,
+  }),
 };
 
 const ieltsOptions = [
@@ -51,14 +51,14 @@ class Register extends React.Component {
       writing: "",
       speaking: "",
       overallband: "",
-      margin :150,
-      registrationErrorMessage :"",
+      margin: 150,
+      registrationErrorMessage: "",
       showModal: false,
-      showModalSuccessfull:false
+      showModalSuccessfull: false,
     };
 
-    this.HEROKUURL = "https://wave-entry-server.herokuapp.com"
-    this.HOMEURL = "http://localhost:5000/"
+    this.HEROKUURL = "https://wave-entry-server.herokuapp.com";
+    this.HOMEURL = "http://localhost:5000/";
   }
 
   handleDestinationChange = (destination) => {
@@ -75,12 +75,12 @@ class Register extends React.Component {
     if (ielts.value === "yes") {
       this.setState({
         showOption: true,
-        margin:25
+        margin: 25,
       });
     } else {
       this.setState({
         showOption: false,
-        margin:150
+        margin: 150,
       });
     }
   };
@@ -91,16 +91,15 @@ class Register extends React.Component {
     this.props.history.push(`/home`);
   };
 
-
   handleCloseModal = () => {
     this.setState({
-      showModal:false
-    })
-  }
+      showModal: false,
+    });
+  };
 
   handleOkButton = () => {
     this.props.history.push(`/home`);
-  }
+  };
 
   handleDataEntry = async () => {
     const ielts = this.state.ielts.value;
@@ -123,31 +122,28 @@ class Register extends React.Component {
 
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-
-    if(ielts === "no"){
-      
-      if(name === "" || address === "" || email ==="" || percentage === ""){
+    if (ielts === "no") {
+      if (name === "" || address === "" || email === "" || percentage === "") {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Fileds cannot be left empty !!"
-        })
-      }else if(!email.match(mailformat)){
+          showModal: true,
+          registrationErrorMessage: "Fileds cannot be left empty !!",
+        });
+      } else if (!email.match(mailformat)) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid Email Format!!"
-        })
-      }else if(phone.length > 10){
+          showModal: true,
+          registrationErrorMessage: "Invalid Email Format!!",
+        });
+      } else if (phone.length > 10) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid Mobile Number!!"
-        })
-      }else if(percentage > 100){
+          showModal: true,
+          registrationErrorMessage: "Invalid Mobile Number!!",
+        });
+      } else if (percentage > 100) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid Percentage!!"
-        })
-      }else{
-
+          showModal: true,
+          registrationErrorMessage: "Invalid Percentage!!",
+        });
+      } else {
         const res = await fetch(`${this.HEROKUURL}/register`, {
           method: "POST",
           headers: {
@@ -171,49 +167,62 @@ class Register extends React.Component {
         });
 
         const data = await res.json();
-        if(data.status == 201){
+        if (data.status == 201) {
           this.setState({
-            showModal:true,
-            registrationErrorMessage:"User Already Exist Cannot Register!!"
-          })
-        }else {
+            showModal: true,
+            registrationErrorMessage: "User Already Exist Cannot Register!!",
+          });
+        } else {
           this.setState({
-            showModalSuccessfull:true,
-            registrationErrorMessage:JSON.stringify(data.message)
-          })
+            showModalSuccessfull: true,
+            registrationErrorMessage: JSON.stringify(data.message),
+          });
         }
-
-      
       }
-    
-    }else if(ielts === "yes"){
+    } else if (ielts === "yes") {
       // if(name === "" || address === "" || email ==="" || percentage === "" || listening ==="" || reading ==="" || speaking ==="" || writing ==="" || overallband ===""){
-      if(name === "" || address === "" || email ==="" || percentage === "" || listening ==="" || reading ==="" || speaking ==="" || writing ==="" || overallband ==="") {
-      this.setState({
-          showModal:true,
-          registrationErrorMessage:"Fileds cannot be left emptyee !!"
-        })
-      }else if(!email.match(mailformat)){
+      if (
+        name === "" ||
+        address === "" ||
+        email === "" ||
+        percentage === "" ||
+        listening === "" ||
+        reading === "" ||
+        speaking === "" ||
+        writing === "" ||
+        overallband === ""
+      ) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid Email Format!!"
-        })
-      }else if(phone.length > 10){
+          showModal: true,
+          registrationErrorMessage: "Fileds cannot be left emptyee !!",
+        });
+      } else if (!email.match(mailformat)) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid Mobile Number!!"
-        })
-      }else if(speaking > 9 || reading > 9 || writing > 9 || listening > 9 || overallband > 9){
+          showModal: true,
+          registrationErrorMessage: "Invalid Email Format!!",
+        });
+      } else if (phone.length > 10) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid band Number!!"
-        })
-      }else if(percentage > 100){
+          showModal: true,
+          registrationErrorMessage: "Invalid Mobile Number!!",
+        });
+      } else if (
+        speaking > 9 ||
+        reading > 9 ||
+        writing > 9 ||
+        listening > 9 ||
+        overallband > 9
+      ) {
         this.setState({
-          showModal:true,
-          registrationErrorMessage:"Invalid Percentage!!"
-        })
-      }else {
+          showModal: true,
+          registrationErrorMessage: "Invalid band Number!!",
+        });
+      } else if (percentage > 100) {
+        this.setState({
+          showModal: true,
+          registrationErrorMessage: "Invalid Percentage!!",
+        });
+      } else {
         const res = await fetch(`${this.HEROKUURL}/register`, {
           method: "POST",
           headers: {
@@ -237,16 +246,16 @@ class Register extends React.Component {
         });
 
         const data = await res.json();
-        if(data.status == 201){
+        if (data.status == 201) {
           this.setState({
-            showModal:true,
-            registrationErrorMessage:"User Already Exist Cannot Register!!"
-          })
-        }else {
+            showModal: true,
+            registrationErrorMessage: "User Already Exist Cannot Register!!",
+          });
+        } else {
           this.setState({
-            showModalSuccessfull:true,
-            registrationErrorMessage:JSON.stringify(data.message)
-          })
+            showModalSuccessfull: true,
+            registrationErrorMessage: JSON.stringify(data.message),
+          });
         }
       }
     }
@@ -259,14 +268,17 @@ class Register extends React.Component {
 
     const { ielts, destination, qualification } = this.state;
     return (
-      <div className="main-register-div" style = {{marginTop:this.state.margin}}>
-        <div className = "register-heading-div text-center">
-          <h2 className = "register-heading">Register New Student</h2>
+      <div
+        className="main-register-div"
+        style={{ marginTop: this.state.margin }}
+      >
+        <div className="register-heading-div text-center">
+          <h2 className="register-heading">Register New Student</h2>
         </div>
         <div className="student-info-div">
           <div className="row">
-            <div className="col-6" style = {{}}>
-              <lable style = {{fontSize:"14px"}}>
+            <div className="col-6" style={{}}>
+              <lable style={{ fontSize: "14px" }}>
                 Name: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -281,12 +293,12 @@ class Register extends React.Component {
             </div>
 
             <div className="col-6">
-              <lable style = {{fontSize:"14px"}}>
+              <lable style={{ fontSize: "14px" }}>
                 Email: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
               <input
-                className="name-input"
+                className="email-input"
                 type="text"
                 onChange={(e) => {
                   this.setState({ email: e.target.value });
@@ -296,31 +308,30 @@ class Register extends React.Component {
             </div>
           </div>
 
-          <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{}}>
-              <lable style = {{fontSize:"14px"}}>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-6" style={{}}>
+              <lable style={{ fontSize: "14px" }}>
                 Address: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
               <input
-                className="name-input"
+                className="address-input"
                 type="text"
                 onChange={(e) => {
-                  this.setState({address: e.target.value });
+                  this.setState({ address: e.target.value });
                 }}
                 placeholder=""
               />
             </div>
 
-            <div className="col-6" >
-              <lable style = {{fontSize:"14px"}}>
+            <div className="col-6">
+              <lable style={{ fontSize: "14px" }}>
                 Phone:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
               <br></br>
               <input
-                className="name-input"
-
+                className="phone-input"
                 type="number"
                 onChange={(e) => {
                   this.setState({ phone: e.target.value });
@@ -330,9 +341,9 @@ class Register extends React.Component {
             </div>
           </div>
 
-          <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{}}>
-              <lable style = {{fontSize:"14px"}}>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-6" style={{}}>
+              <lable style={{ fontSize: "14px" }}>
                 Qualification: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
@@ -342,18 +353,18 @@ class Register extends React.Component {
                 onChange={this.handleQualificationChange}
                 options={qualificationOptions}
                 isSearchable={false}
-                styles = {customStyles}
+                styles={customStyles}
               />
             </div>
 
-            <div className="col-6" >
-              <lable style = {{fontSize:"14px"}}>
+            <div className="col-6">
+              <lable style={{ fontSize: "14px" }}>
                 Percentage / GPA:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
               <br></br>
               <input
-                className="name-input"
+                className="marks-input"
                 type="number"
                 onChange={(e) => {
                   this.setState({ percentage: e.target.value });
@@ -363,152 +374,184 @@ class Register extends React.Component {
             </div>
           </div>
 
-          <div className="row"  style = {{marginTop:"20px"}}>
-            <div className="col-6" style = {{}}>
-              <lable style = {{fontSize:"14px"}}>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-6" style={{}}>
+              <lable style={{ fontSize: "14px" }}>
                 Destination: <span style={{ color: "red" }}>*</span>
               </lable>{" "}
               <br></br>
               <Select
-            value={this.state.destination}
-            isSearchable={false}
-            placeholder="australia"
-            onChange={this.handleDestinationChange}
-            options={destinationOptions}
-            styles = {customStyles}
-            
-          />
+                className="destination-selector"
+                value={this.state.destination}
+                isSearchable={false}
+                placeholder="australia"
+                onChange={this.handleDestinationChange}
+                options={destinationOptions}
+                styles={customStyles}
+              />
             </div>
 
-            <div className="col-6" >
-              <lable style = {{fontSize:"14px"}}>
+            <div className="col-6">
+              <lable style={{ fontSize: "14px" }}>
                 IELTS:
                 <span style={{ color: "red", textIndent: "2em" }}>*</span>
               </lable>
               <br></br>
               <Select
-                  value={this.state.ielts}
-                  placeholder="no"
-                  onChange={this.handleIeltsChange}
-                  options={ieltsOptions}
-                  isSearchable={false}
-                  styles = {customStyles}
-                /> 
+                className="ieltsband-selector"
+                value={this.state.ielts}
+                placeholder="no"
+                onChange={this.handleIeltsChange}
+                options={ieltsOptions}
+                isSearchable={false}
+                styles={customStyles}
+              />
             </div>
           </div>
-
-          
-
         </div>
 
-        <div className = "ielts-score-div">
-          {this.state.showOption &&
-           <div className = "ielts-input-div">
-             <p style = {{fontSize:"16px"}}>Please enter your ielts score</p>
+        <div className="ielts-score-div">
+          {this.state.showOption && (
+            <div className="ielts-input-div">
+              <p style={{ fontSize: "16px" }}>Please enter your ielts score</p>
 
-              <div className = "row" >
-
-                <div className = "col-3">
-                <lable style = {{fontSize:"12px"}}>
-                 Listening <span style={{ color: "red" }}>*</span>
-              </lable><br></br>
-                <input className="listening-input"  type="number"   onChange={(e) => { this.setState({listening: e.target.value})}} ></input><br></br>
-
+              <div className="row">
+                <div className="col-3">
+                  <lable style={{ fontSize: "12px" }}>
+                    Listening <span style={{ color: "red" }}>*</span>
+                  </lable>
+                  <br></br>
+                  <input
+                    className="listening-input"
+                    type="number"
+                    onChange={(e) => {
+                      this.setState({ listening: e.target.value });
+                    }}
+                  ></input>
+                  <br></br>
                 </div>
-                <div className = "col-3">
-                <lable  style = {{fontSize:"12px"}}>
-                 Reading <span style={{ color: "red" }}>*</span>
-              </lable><br></br>
-                <input className="reading-input"  type="number"  onChange={(e) => { this.setState({reading: e.target.value})}} ></input><br></br>
-
-                  </div>
-                  <div className = "col-3">
-                  <lable style = {{fontSize:"12px"}}>
-                 Writing <span style={{ color: "red" }}>*</span>
-              </lable><br></br>
-                  <input className="writing-input"  type="number"  onChange={(e) => { this.setState({writing: e.target.value})}} ></input><br></br>
-
-                  </div>
-                  <div className = "col-3">
-                  <lable  style = {{fontSize:"12px"}}>
-                 Speaking <span style={{ color: "red" }}>*</span>
-              </lable><br></br>
-                  <input className="speaking-input"  type="number" onChange={(e) => { this.setState({speaking: e.target.value})}} ></input><br></br>
-
-                  </div>
-      
-
+                <div className="col-3">
+                  <lable style={{ fontSize: "12px" }}>
+                    Reading <span style={{ color: "red" }}>*</span>
+                  </lable>
+                  <br></br>
+                  <input
+                    className="reading-input"
+                    type="number"
+                    onChange={(e) => {
+                      this.setState({ reading: e.target.value });
+                    }}
+                  ></input>
+                  <br></br>
+                </div>
+                <div className="col-3">
+                  <lable style={{ fontSize: "12px" }}>
+                    Writing <span style={{ color: "red" }}>*</span>
+                  </lable>
+                  <br></br>
+                  <input
+                    className="writing-input"
+                    type="number"
+                    onChange={(e) => {
+                      this.setState({ writing: e.target.value });
+                    }}
+                  ></input>
+                  <br></br>
+                </div>
+                <div className="col-3">
+                  <lable style={{ fontSize: "12px" }}>
+                    Speaking <span style={{ color: "red" }}>*</span>
+                  </lable>
+                  <br></br>
+                  <input
+                    className="speaking-input"
+                    type="number"
+                    onChange={(e) => {
+                      this.setState({ speaking: e.target.value });
+                    }}
+                  ></input>
+                  <br></br>
+                </div>
               </div>
 
-              <div className =  "row m-4">
-
-                <div className = "col-12">
-                <lable style = {{fontSize:"14px"}}>
-                 Overall Band <span style={{ color: "red" }}>*</span>
-              </lable><br></br>
-                  <input className = "overallband-input"  type="number"  onChange={(e) => { this.setState({overallband: e.target.value})}} ></input>
-                </div> 
+              <div className="row m-4">
+                <div className="col-12">
+                  <lable style={{ fontSize: "14px" }}>
+                    Overall Band <span style={{ color: "red" }}>*</span>
+                  </lable>
+                  <br></br>
+                  <input
+                    className="overallband-input"
+                    type="number"
+                    onChange={(e) => {
+                      this.setState({ overallband: e.target.value });
+                    }}
+                  ></input>
+                </div>
               </div>
-           </div>
-            
-          }
+            </div>
+          )}
+        </div>
+
+        <div className="button-div">
+          <div className="row">
+            <div className="col-6">
+              <button
+                className="cancelButton"
+                onClick={() => this.handleCancel()}
+              >
+                Cancel
+              </button>
+            </div>
+
+            <div className="col-6">
+              <button
+                className="register-Button"
+                onClick={this.handleDataEntry}
+              >
+                Register
+              </button>
+            </div>
           </div>
+        </div>
 
-          <div className = "button-div">
-             <div className = "row">
+        {
+          /* modal dialog */
 
-               <div className = "col-6">
-               <button className = "cancelButton" onClick ={() => this.handleCancel()} >Cancel</button>
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="Minimal Modal Example"
+            className="Modal"
+            overlayClassName="Overlay"
+            onRequestClose={this.handleCloseModal}
+          >
+            <div className="modaldiv text-center">
+              <p>{this.state.registrationErrorMessage}</p>
+              <img className="sademoji" src={SadEmoji}></img>
+            </div>
+          </ReactModal>
+        }
 
-               </div>
+        {
+          /* modal dialog */
 
-               <div className = "col-6">
-               <button className = "register-Button" onClick = {this.handleDataEntry}>Register</button>
-               </div>
-
-             </div>
-     
-          </div>
-
-           {/* modal dialog */
-              
-              <ReactModal 
-              isOpen={this.state.showModal}
-              contentLabel="Minimal Modal Example"
-              className="Modal"
-              overlayClassName="Overlay"
-              onRequestClose={this.handleCloseModal}
-           >
-             <div className = "modaldiv text-center">
-               <p>{this.state.registrationErrorMessage}</p>
-               <img className = "sademoji"  src = {SadEmoji}></img>
-              </div>
-            
-             </ReactModal>}
-
-              {/* modal dialog */
-              
-              <ReactModal 
-              isOpen={this.state.showModalSuccessfull}
-              contentLabel="Minimal Modal Example"
-              className="Modal"
-              overlayClassName="Overlay"
-              onRequestClose={this.handleCloseModal}
-           >
-             <div className = "modaldiv text-center">
-               <p>{this.state.registrationErrorMessage}</p>
-               <button className = "okButton" onClick = {this.handleOkButton}>OK</button> 
-               
-              </div>
-            
-             </ReactModal>}
-
-             
-
+          <ReactModal
+            isOpen={this.state.showModalSuccessfull}
+            contentLabel="Minimal Modal Example"
+            className="Modal"
+            overlayClassName="Overlay"
+            onRequestClose={this.handleCloseModal}
+          >
+            <div className="modaldiv text-center">
+              <p>{this.state.registrationErrorMessage}</p>
+              <button className="okButton" onClick={this.handleOkButton}>
+                OK
+              </button>
+            </div>
+          </ReactModal>
+        }
       </div>
     );
-
- 
   }
 }
 
