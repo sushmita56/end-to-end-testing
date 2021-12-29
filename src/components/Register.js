@@ -348,6 +348,7 @@ class Register extends React.Component {
               </lable>{" "}
               <br></br>
               <Select
+                className="qualification-selector"
                 value={this.state.qualification}
                 placeholder="+2"
                 onChange={this.handleQualificationChange}

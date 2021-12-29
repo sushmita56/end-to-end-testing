@@ -9,30 +9,30 @@ Feature: Add student
 
     Scenario: Add students with details
         When the user adds student with following details
-            | name          | sushank             |
-            | email         | sushank56@gmail.com |
-            | address       | butwal              |
-            | phone         | 9876231452          |
-            | qualification | bachelors           |
-            | gpa           | 4                   |
-            | destination   | canada              |
-            | ielts         | no                  |
+            | name          | sushank                |
+            | email         | sushank50008@gmail.com |
+            | address       | butwal                 |
+            | phone         | 9876231452             |
+            | qualification | masters                |
+            | gpa           | 4                      |
+            | destination   | canada                 |
+            | ielts         | no                     |
         Then ielts band form should not be visible
 
     Scenario: Add students with ielts  score
         When the user adds student with following details
-            | name          | sushank             |
-            | email         | sushank56@gmail.com |
-            | address       | butwal              |
-            | phone         | 9876231452          |
-            | qualification | bachelors           |
-            | gpa           | 4                   |
-            | destination   | canada              |
-            | ielts         | yes                 |
-            | listening     | 7                   |
-            | reading       | 6                   |
-            | writing       | 8                   |
-            | speaking      | 5                   |
-            | overallBand   | 7                   |
+            | name          | sushank                |
+            | email         | sushank65006@gmail.com |
+            | address       | butwal                 |
+            | phone         | 9876231452             |
+            | qualification | bachelors              |
+            | gpa           | 4                      |
+            | destination   | australia              |
+            | ielts         | yes                    |
+            | listening     | 7                      |
+            | reading       | 6                      |
+            | writing       | 8                      |
+            | speaking      | 5                      |
+            | overallBand   | 7                      |
         Then success message "User Registration Successfull!!" should be displayed
 
